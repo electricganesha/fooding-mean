@@ -1,3 +1,4 @@
+require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,8 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var uglifyJs = require("uglify-js");
 var fs = require('fs');
+var passport = require('passport');
 
 require('./app_api/models/db');
+require('./app_api/config/passport');
 
 var routesApi = require('./app_api/routes/index');
 
@@ -18,17 +21,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 var appClientFiles = [
-  'app_client/sitePUSH.js',
+  'app_client/fooding.js',
   'app_client/home/home.controller.js',
 ];
 
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
 
-fs.writeFile('public/angular/sitePUSH.min.js', uglified.code, function (err){
+fs.writeFile('public/angular/fooding.min.js', uglified.code, function (err){
   if(err) {
     console.log(err);
   } else {
-    console.log("Script generated and saved:", 'pushSITE.min.js');
+    console.log("Script generated and saved:", 'fooding.min.js');
   }
 });
 
@@ -40,6 +43,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 
+app.use(passport.initialize());
 app.use('/api', routesApi);
 /*app.use(function(req,res) {
   res.sendFile(path.join(__dirname, 'app_client', 'index.html'));

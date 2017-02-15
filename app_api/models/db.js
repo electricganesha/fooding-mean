@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 
-var dbURI = 'mongodb://localhost/sitePUSH';
+var dbURI = 'mongodb://localhost/fooding';
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function()
@@ -60,7 +60,6 @@ process.on('SIGTERM', function()
   });
 });
 
-require('./projects');
-require('./news');
-require('./team');
-require('./lab');
+require('./users');
+require('./events');
+require('./categories');

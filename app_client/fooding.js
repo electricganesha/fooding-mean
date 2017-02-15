@@ -1,6 +1,6 @@
 (function() {
 
-angular.module('sitePUSH', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+angular.module('fooding', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 function config($routeProvider, $locationProvider)
 {
@@ -38,7 +38,7 @@ function config($routeProvider, $locationProvider)
   });
 }
 
-angular.module('sitePUSH')
+angular.module('fooding')
 .config(['$routeProvider', '$locationProvider', config]);
 
 }) ();

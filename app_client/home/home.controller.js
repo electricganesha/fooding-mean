@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('sitePUSH')
+    .module('fooding')
     .controller('homeCtrl', homeCtrl);
 
   homeCtrl.$inject = ['$scope'];
