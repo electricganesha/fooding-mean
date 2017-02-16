@@ -25,6 +25,8 @@ module.exports.register = function(req,res)
 
   user.setPassword(req.body.password);
 
+  user.provider = "_fooding"
+
   user.save(function(err)
   {
     var token;

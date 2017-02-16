@@ -45,9 +45,9 @@ app.use(express.static(path.join(__dirname, 'app_client')));
 
 app.use(passport.initialize());
 app.use('/api', routesApi);
-/*app.use(function(req,res) {
+app.use(function(req,res) {
   res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
-});*/
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -78,6 +78,17 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+//error handlers
+//Catch unauthorized errors
+app.use(function(err, req, res, next)
+{
+  if(err.name === 'UnauthorizedError')
+  {
+    res.status(401);
+    res.render({ "message" : err.name + ": " + err.message});
+  }
 });
 
 

@@ -16,6 +16,13 @@ var userSchema = new mongoose.Schema(
     },
     hash: String,
     salt: String,
+    provider:
+    {
+      type:String,
+      required:true
+    },
+    googleProfileBLOB:Object,
+    facebookProfileBLOB:Object 
   }
 );
 

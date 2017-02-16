@@ -15,7 +15,6 @@ module.exports.eventsList = function(req, res) {
 
 /* GET an event by its id */
 module.exports.eventsReadOne = function(req, res) {
-  console.log('Finding event details', req.params);
   if (req.params && req.params.eventId) {
     thisEventInstance
       .findById(req.params.eventId)
@@ -58,6 +57,7 @@ module.exports.eventsCreate = function(req, res) {
     reqLongitude = data.results[0].geometry.location.lng;
 
     thisEventInstance.create({
+      author:req.payload._id,
       name: req.body.name,
       address: req.body.address,
       longitude:reqLatitude,
@@ -107,9 +107,7 @@ module.exports.eventsUpdateOne = function(req, res) {
         if(req.body.category)
             aEvent.category = req.body.category;
 
-        console.log("bla");
         var date = new Date();
-        console.log(date);
 
         aEvent.dateCreated = date;
 
@@ -133,11 +131,9 @@ module.exports.eventsDeleteOne = function(req, res) {
       .exec(
         function(err, aEvent) {
           if (err) {
-            console.log(err);
             sendJSONresponse(res, 404, err);
             return;
           }
-          console.log("Event id " + eventId + " deleted");
           sendJSONresponse(res, 204, null);
         }
     );
