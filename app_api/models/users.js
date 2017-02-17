@@ -21,8 +21,7 @@ var userSchema = new mongoose.Schema(
       type:String,
       required:true
     },
-    googleProfileBLOB:Object,
-    facebookProfileBLOB:Object 
+    profileBLOB:Object,
   }
 );
 

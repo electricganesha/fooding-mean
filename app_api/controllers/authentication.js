@@ -45,33 +45,92 @@ module.exports.register = function(req,res)
 
 module.exports.login = function(req,res)
 {
-  if(!req.body.email || !req.body.password)
-  {
-    sendJSONresponse(res,400, {
-      "message": "Email and password are required"
-    });
-    return;
-  }
 
-  passport.authenticate('local', function(err, user, info)
+  if(req.body.provider)
   {
-    var token;
-
-    if(err)
+    if(req.body.provider == "_fooding")
     {
-      sendJSONresponse(res,404,err);
-      return;
+      if(!req.body.email || !req.body.password)
+      {
+        sendJSONresponse(res,400, {
+          "message": "Email and password are required"
+        });
+        return;
+      }
+
+      passport.authenticate('local', function(err, user, info)
+      {
+        var token;
+
+        if(err)
+        {
+          sendJSONresponse(res,404,err);
+          return;
+        }
+
+        if(user)
+        {
+          token = user.generateJwt();
+          sendJSONresponse(res,200, {
+            "token":token
+          });
+        }
+        else {
+          sendJSONresponse(res,401,info);
+        }
+      }) (req,res);
     }
-
-    if(user)
+    else if(req.body.provider == "_google" || req.body.provider == "_facebook")
     {
-      token = user.generateJwt();
-      sendJSONresponse(res,200, {
-        "token":token
+      User.findOne({email: req.body.email}, function(err,user) {
+
+        if (err)
+        {
+          sendJSONresponse(res,400, {
+            "message": "Error "+err,
+          });
+          return;
+        }
+
+        if (!user) {
+
+          if(!req.body.name)
+          {
+            sendJSONresponse(res,400, {
+              "message": "Name is required"
+            });
+            return;
+          }
+
+            user = new User({
+              name: req.body.name,
+              email: req.body.email,
+              password:null,
+              provider:req.body.provider,
+              profileBLOB:JSON.parse(req.body.profileBLOB)
+            });
+
+          user.save(function(err) {
+            if (err) console.log(err);
+            token = user.generateJwt();
+            sendJSONresponse(res,200, {
+              "token":token
+            });
+          });
+        } else {
+          //found user. Return token
+          token = user.generateJwt();
+          sendJSONresponse(res,200, {
+            "token":token
+          });
+        }
       });
-    }
-    else {
-      sendJSONresponse(res,401,info);
-    }
-  }) (req,res);
+  }
+}
+else {
+  sendJSONresponse(res,400, {
+    "message": "A provider must be specified"
+  });
+  return;
+}
 };

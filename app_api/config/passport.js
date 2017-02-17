@@ -59,7 +59,7 @@ passport.use( new FacebookStrategy({
                     password:null,
                     provider:'_facebook',
                     //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
-                    facebookProfileBLOB: profile._json
+                    profileBLOB: profile._json
                 });
                 user.save(function(err) {
                     if (err) console.log(err);
@@ -81,12 +81,17 @@ passport.use( new GoogleStrategy(
   },
   function(accessToken, refreshToken, profile, done)
   {
+    console.log("entrou no google auth");
+    console.log(accessToken);
     User.findOne({'email':profile.emails[0].value}, function(err,user)
     {
       if (err)
       {
         return done(err);
       }
+
+      console.log(profile._json);
+
       if (!user) {
                 user = new User({
                     name: profile.displayName,
@@ -94,14 +99,16 @@ passport.use( new GoogleStrategy(
                     password:null,
                     provider:'_google',
                     //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
-                    googleProfileBLOB: profile._json
+                    profileBLOB: profile._json
                 });
                 user.save(function(err) {
                     if (err) console.log(err);
+                    console.log("criou user novo " + user);
                     return done(err, user);
                 });
             } else {
                 //found user. Return
+                console.log("user ja existe " + user);
                 return done(err, user);
             }
     });
