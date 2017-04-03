@@ -28,11 +28,12 @@ passport.use(new LocalStrategy({
           return done(null, false,{
             message: err
           });
-
-      if(user.facebook.id != "" || user.google.id != "")
-      { return done(null,false, {
-        message: 'You have registered with a social network, please log in with a social network'
-      }); }
+          console.log(user.facebook.id)
+      if(user.facebook.id != undefined || user.google.id != undefined) { 
+        return done(null,false, {
+          message: 'You have registered with a social network, please log in with a social network'
+        }); 
+      }
 
       // Return if user not found in database
       if (!user) {
@@ -78,7 +79,7 @@ function(accessToken, email, refreshToken, profile, done) {
                     return done(null, user); // user found, return that user
                 } else {
                     // if there is no user found with that facebook id, create them
-                    var newUser            = new User();
+                    var newUser = new User();
 
                     newUser.email = profile.emails[0].value;
                     newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
@@ -92,19 +93,17 @@ function(accessToken, email, refreshToken, profile, done) {
 
                     // save our user to the database
                     newUser.save(function(err) {
-
                         if (err){
                             throw err;
                         }
-
                         // if successful, return the new user
                         return done(null, newUser);
                     });
                 }
 
             });
-             });
-           }
+          });
+      }
 ));
 
 passport.use(new GoogleStrategy({

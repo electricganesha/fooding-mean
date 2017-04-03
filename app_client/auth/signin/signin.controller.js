@@ -23,7 +23,7 @@
           alert(err.message);
         })
         .then(function(){
-          $location.path('/');
+          $location.path('profile');
         });
     };
 

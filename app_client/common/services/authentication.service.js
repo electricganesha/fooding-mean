@@ -8,11 +8,11 @@
   function authentication ($http, $window) {
 
     var saveToken = function (token) {
-      $window.localStorage['mean-token'] = token;
+      $window.localStorage['fooding-token'] = token;
     };
 
     var getToken = function () {
-      return $window.localStorage['mean-token'];
+      return $window.localStorage['fooding-token'];
     };
 
     var isLoggedIn = function() {
@@ -64,7 +64,7 @@
     };
 
     logout = function() {
-      $window.localStorage.removeItem('mean-token');
+      $window.localStorage.removeItem('fooding-token');
     };
 
     return {

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 
-var dbURI = 'mongodb://localhost/pushwebmarket';
+var dbURI = 'mongodb://localhost/fooding';
 
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
@@ -64,6 +64,4 @@ process.on('SIGTERM', function()
     process.exit(0);
   });
 });
-
-require('./skills');
 require('./users');

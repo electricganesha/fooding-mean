@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var Skill = mongoose.model('Skill');
 
 module.exports.profileRead = function(req, res) {
 
@@ -33,30 +32,7 @@ module.exports.profileUpdate = function(req,res)
     user.nif = req.body.profileDataUpdate.nif;
     user.telephone = req.body.profileDataUpdate.telephone;
 
-    var skills = [];
-
-    for(var i=0; i<req.body.profileDataUpdate.tags.length; i++)
-    {
-
-      Skill.findOne({ 'name': req.body.profileDataUpdate.tags[i].text },function(err,skill){
-
-        if(err){ return next(err); }
-
-        var tempSkill = new Skill(skill);
-
-        skills.push(tempSkill);
-
-      });
-    }
-
-    console.log("BUBI");
-
     setTimeout(function(){
-
-      console.log(skills);
-
-      user.skills = skills;
-
       user.save(function(err,newuser){
         if(err){ console.log(err); }
         console.log(newuser);

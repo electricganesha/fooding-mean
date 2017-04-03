@@ -9,6 +9,10 @@
         templateUrl: 'home/home.view.html',
         controller: 'homeCtrl'
       })
+      .when('/events', {
+        templateUrl: '/events/events.view.html',
+        controller: 'eventsCtrl'
+      })
       .when('/profile', {
         templateUrl: '/profile/profile.view.html',
         controller: 'profileCtrl',

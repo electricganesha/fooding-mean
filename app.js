@@ -31,6 +31,7 @@ var files = [
   'app_client/common/services/authentication.service.js',
   'app_client/common/services/data.service.js',
   'app_client/home/home.controller.js',
+  'app_client/events/events.controller.js',
   'app_client/profile/profile.controller.js',
   'app_client/common/directives/navigation/navigation.controller.js',
   'app_client/common/directives/navigation/navigation.directive.js',

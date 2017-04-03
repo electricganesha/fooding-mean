@@ -20,7 +20,6 @@ var userSchema = new mongoose.Schema({
   address:String,
   nif:String,
   telephone:String,
-  skills: [{type: mongoose.Schema.Types.ObjectId, ref: 'Skill'}],
   facebook :{
     id : String,
     token : String,

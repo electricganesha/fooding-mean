@@ -9,22 +9,9 @@ var auth = jwt({
 
 var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
-var ctrlSkills = require('../controllers/skill');
 
 router.get('/profile', auth, ctrlProfile.profileRead);
 router.post('/profile', ctrlProfile.profileUpdate);
-
-//skills
-router.get('/skills', ctrlSkills.skillsGetAll);
-router.get('/skillsByName', ctrlSkills.skillsGetAllByName);
-router.post('/skills', ctrlSkills.skillsCreate);
-
-/**
-** TODO
-**/
-/*router.get('/skills/:skillid', ctrlSkills.skillsGetOne);
-router.put('/skills/:skillid', ctrlSkills.skillsUpdateOne);
-router.delete('/skills/:skillid', ctrlSkills.skillsDeleteOne);*/
 
 // authentication
 router.post('/register', ctrlAuth.register);
