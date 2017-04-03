@@ -5,112 +5,156 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+var configAuth = require('./auth');
+
+// used to serialize the user the session
+passport.serializeUser(function(user,done){
+  done(null,user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+//used to deserialize the user
+passport.deserializeUser(function(id,done){
+  User.findById(id,function(err,user){
+    done(err,user);
+  });
 });
 
-passport.use( new LocalStrategy({
-  usernameField: 'email'
+passport.use(new LocalStrategy({
+    usernameField: 'email'
   },
-  function(username, password, done)
-  {
-    User.findOne({ email: username}, function(err,user)
-  {
-    if(err) { return done(err);}
-    if(!user)
-    {
-      return done(null, false, {
-        message: 'This username doesnt exist. Please try another one.'
-      });
-    }
-    if(!user.validPassword(password))
-    {
-      return done(null, false, {
-        message: 'Incorrect password.'
-      });
-    }
-    return done(null, user);
+  function(username, password, done) {
+    User.findOne({ email: username }, function (err, user) {
+      if (err)
+          return done(null, false,{
+            message: err
+          });
+
+      if(user.facebook.id != "" || user.google.id != "")
+      { return done(null,false, {
+        message: 'You have registered with a social network, please log in with a social network'
+      }); }
+
+      // Return if user not found in database
+      if (!user) {
+        return done(null, false, {
+          message: 'User not found'
+        });
+      }
+      // Return if password is wrong
+      if (!user.validPassword(password)) {
+        return done(null, false, {
+          message: 'Password is wrong'
+        });
+      }
+      // If credentials are correct, return the user object
+      return done(null, user);
     });
   }
 ));
 
-passport.use( new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "/api/auth/facebook/callback",
-  profileFields: ['id','displayName','name', 'photos', 'emails']
-  },
-  function(accessToken, refreshToken, profile, done)
-  {
-    User.findOne({'email':profile.emails[0].value}, function(err,user)
-    {
-      if (err)
-      {
-        return done(err);
-      }
-      if (!user) {
-                user = new User({
-                    name: profile.displayName,
-                    email: profile.emails[0].value,
-                    password:null,
-                    provider:'_facebook',
-                    //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
-                    profileBLOB: profile._json
-                });
-                user.save(function(err) {
-                    if (err) console.log(err);
-                    return done(err, user);
-                });
-            } else {
-                //found user. Return
-                return done(err, user);
-            }
-    });
-  }
+passport.use(new FacebookStrategy({
+
+  //pull FB info
+  clientID : configAuth.facebookAuth.clientID,
+  clientSecret : configAuth.facebookAuth.clientSecret,
+  callbackURL :  configAuth.facebookAuth.callbackURL,
+  profileFields : ['id','email','gender','link','locale','name','timezone','verified','photos']
+},
+
+function(accessToken, email, refreshToken, profile, done) {
+  process.nextTick(function () {
+    // find the user in the database based on their facebook id
+            User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err)
+                    return done(null, false,{
+                      message: err
+                    });
+
+                // if the user is found, then log them in
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    // if there is no user found with that facebook id, create them
+                    var newUser            = new User();
+
+                    newUser.email = profile.emails[0].value;
+                    newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
+                    newUser.profilePic = profile.photos[0].value;
+                    // set all of the facebook information in our user model
+                    newUser.facebook.id    = profile.id; // set the users facebook id
+                    newUser.facebook.token = accessToken; // we will save the token that facebook provides to the user
+                    newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
+                    newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                    newUser.facebook.profilePic = profile.photos[0].value;
+
+                    // save our user to the database
+                    newUser.save(function(err) {
+
+                        if (err){
+                            throw err;
+                        }
+
+                        // if successful, return the new user
+                        return done(null, newUser);
+                    });
+                }
+
+            });
+             });
+           }
 ));
 
-passport.use( new GoogleStrategy(
-  {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/api/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done)
-  {
-    console.log("entrou no google auth");
-    console.log(accessToken);
-    User.findOne({'email':profile.emails[0].value}, function(err,user)
-    {
-      if (err)
-      {
-        return done(err);
-      }
+passport.use(new GoogleStrategy({
 
-      console.log(profile._json);
+       clientID        : configAuth.googleAuth.clientID,
+       clientSecret    : configAuth.googleAuth.clientSecret,
+       callbackURL     : configAuth.googleAuth.callbackURL,
+   },
+   function(token, refreshToken, profile, done) {
 
-      if (!user) {
-                user = new User({
-                    name: profile.displayName,
-                    email: profile.emails[0].value,
-                    password:null,
-                    provider:'_google',
-                    //now in the future searching on User.findOne({'facebook.id': profile.id } will match because of this next line
-                    profileBLOB: profile._json
-                });
-                user.save(function(err) {
-                    if (err) console.log(err);
-                    console.log("criou user novo " + user);
-                    return done(err, user);
-                });
-            } else {
-                //found user. Return
-                console.log("user ja existe " + user);
-                return done(err, user);
-            }
-    });
-  }
-))
+       // make the code asynchronous
+       // User.findOne won't fire until we have all our data back from Google
+       process.nextTick(function() {
+
+         console.log("dentro do google auth");
+
+         console.log(profile);
+           // try to find the user based on their google id
+           User.findOne({ 'google.id' : profile.id }, function(err, user) {
+               if (err)
+                   return done(err);
+
+               if (user) {
+
+                   // if a user is found, log them in
+                   return done(null, user);
+               } else {
+                   // if the user isnt in our database, create a new user
+                   var newUser          = new User();
+
+                   newUser.email = profile.emails[0].value;
+                   newUser.name = profile.displayName;
+                   newUser.profilePic = profile.photos[0].value;
+                   // set all of the relevant information
+                   newUser.google.id    = profile.id;
+                   newUser.google.token = token;
+                   newUser.google.name  = profile.displayName;
+                   newUser.google.email = profile.emails[0].value; // pull the first email
+                   newUser.google.profilePic = profile.photos[0].value;
+
+                   // save the user
+                   newUser.save(function(err) {
+                       if (err){
+                            console.log(err);
+                           throw err;
+                         }
+                       return done(null, newUser);
+                   });
+               }
+           });
+       });
+
+   }));

@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+
+.review
+{
+  padding-bottom:5px;
+}
+
+.panel-body.review-container
+{
+  padding-top:0px;
+}
+
+span.label.label-warning
+{
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.review-header
+{
+  margin-bottom:10px;
+}
+
+.reviewAuthor
+{
+  margin:0 5px;
+}
+
+.reviewTimestamp
+{
+  color:#ccc;
+}
+
+#filter
+{
+  margin-left:4px;
+}

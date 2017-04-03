@@ -1,44 +1,37 @@
-(function() {
+(function () {
 
-angular.module('fooding', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+  angular.module('fooding', ['ngRoute','ngTagsInput', 'ui.bootstrap']);
 
-function config($routeProvider, $locationProvider)
-{
-  $routeProvider
-  .when('/', {
-    templateUrl: 'home/home.view.html',
-    controller: 'homeCtrl',
-    controllerAs: 'vm'
-    });/*
-  .when('/about', {
-    templateUrl: 'common/views/genericText.view.html',
-    controller: 'aboutCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/location/:locationid', {
-    templateUrl: '/locationDetail/location.view.html',
-    controller: 'locationDetailCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/register', {
-    templateUrl: '/auth/register/register.view.html',
-    controller: 'registerCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/login',{
-    templateUrl: '/auth/login/login.view.html',
-    controller: 'loginCtrl',
-    controllerAs: 'vm'
-  })*/
-  //.otherwise({redirectTo: '/'});
+  function config ($routeProvider, $locationProvider) {
 
-  $locationProvider.html5Mode({
-    enabled:true,
-    requireBase: false
-  });
-}
+    $routeProvider
+      .when('/', {
+        templateUrl: 'home/home.view.html',
+        controller: 'homeCtrl'
+      })
+      .when('/profile', {
+        templateUrl: '/profile/profile.view.html',
+        controller: 'profileCtrl',
+        controllerAs: 'vm'
+      })
+      .otherwise({redirectTo: '/'});
 
-angular.module('fooding')
-.config(['$routeProvider', '$locationProvider', config]);
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
+  }
 
-}) ();
+  function run($rootScope, $location, authentication, $route) {
+    $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
+      alert(event);
+      if ($location.path() === '/profile' && !authentication.isLoggedIn()) {
+        $location.path('/');
+      }
+    });
+  }
+
+  angular
+    .module('fooding')
+    .config(['$routeProvider', '$locationProvider', config])
+    //.run(['$rootScope', '$location', 'authentication', run]);
+
+})();

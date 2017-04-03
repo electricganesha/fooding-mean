@@ -1,13 +1,19 @@
 require('dotenv').load();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
 var uglifyJs = require("uglify-js");
 var fs = require('fs');
-var passport = require('passport');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
 require('./app_api/models/db');
 require('./app_api/config/passport');
@@ -20,12 +26,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-var appClientFiles = [
+var files = [
   'app_client/fooding.js',
+  'app_client/common/services/authentication.service.js',
+  'app_client/common/services/data.service.js',
   'app_client/home/home.controller.js',
+  'app_client/profile/profile.controller.js',
+  'app_client/common/directives/navigation/navigation.controller.js',
+  'app_client/common/directives/navigation/navigation.directive.js',
+  'app_client/auth/signin/signin.controller.js',
+  'app_client/auth/register/register.controller.js'
 ];
 
-var uglified = uglifyJs.minify(appClientFiles, { compress : false });
+var uglified = uglifyJs.minify(files, { compress : false });
 
 fs.writeFile('public/angular/fooding.min.js', uglified.code, function (err){
   if(err) {
@@ -36,16 +49,21 @@ fs.writeFile('public/angular/fooding.min.js', uglified.code, function (err){
 });
 
 // uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
+app.use('/node_modules', express.static(__dirname + '/node_modules/'));
 
 app.use(passport.initialize());
+
+//app.use('/', routes);
 app.use('/api', routesApi);
-app.use(function(req,res) {
+
+app.use(function(req, res) {
   res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
 });
 
@@ -57,6 +75,14 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+// [SH] Catch unauthorised errors
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
 
 // development error handler
 // will print stacktrace
@@ -78,17 +104,6 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
-});
-
-//error handlers
-//Catch unauthorized errors
-app.use(function(err, req, res, next)
-{
-  if(err.name === 'UnauthorizedError')
-  {
-    res.status(401);
-    res.render({ "message" : err.name + ": " + err.message});
-  }
 });
 
 
