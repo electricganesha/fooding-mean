@@ -2,6 +2,11 @@ var mongoose = require( 'mongoose' );
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
+var reputationSchema = new mongoose.Schema({
+    upVotes: Number,
+    downVotes: Number
+});
+
 
 var userSchema = new mongoose.Schema({
   email: {
@@ -16,9 +21,11 @@ var userSchema = new mongoose.Schema({
   hash: String,
   salt: String,
   profilePic: String,
-  nickname:String,
+  profileBio: String,
+  reputation: [reputationSchema],
+  stars: Number,
+  events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Events' }],
   address:String,
-  nif:String,
   telephone:String,
   facebook :{
     id : String,

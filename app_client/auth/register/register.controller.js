@@ -6,28 +6,35 @@
 
   registerCtrl.$inject = ['$scope', '$location', 'authentication', '$uibModalInstance'];
   function registerCtrl($scope, $location, authentication, $uibModalInstance) {
-    console.log("ola");
-    $scope.credentials = {
-      name : "",
-      email : "",
-      password : ""
-    };
+      console.log("Register controller running");
 
-    $scope.close = function() {
-        $uibModalInstance.close();
-    };
+      $scope.credentials = {
+        name : "",
+        email : "",
+        password : ""
+      };
 
-    $scope.onSubmit = function () {
-      console.log('Submitting registration');
-      authentication
-        .register($scope.credentials)
-        .error(function(err){
-          alert(err.message);
-        })
-        .then(function(){
-          $location.path('profile');
-        });
-    };
+      //Close modal
+      $scope.close = function() {
+          $uibModalInstance.close();
+      };
+      
+      //Submit modal
+      $scope.onSubmit = function () {
+          if(!$scope.credentials.name || !$scope.credentials.email || !$scope.credentials.password) {
+            alert("All fields are required");
+            return;
+          } else {
+            authentication
+              .register($scope.credentials)
+              .error(function(err){
+                alert(err.message);
+              })
+              .then(function(){
+                $location.path('profile');
+              });
+          }
+      };
 
   }
 

@@ -16,35 +16,33 @@ router.post('/profile', ctrlProfile.profileUpdate);
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
-// Facebook Login
-router.get('/fblogin', passport.authenticate('facebook', { session: false, scope: [] }));
 
+
+// Facebook Login
+router.get('/fblogin', passport.authenticate('facebook', { session: false, scope: ['email'] }));
 router.get('/fblogin/callback', passport.authenticate('facebook', { session: false, failureRedirect: "/" }),
-       function(req, res) {
+      function(req, res) {
         var token = req.user.generateJwt();
         res.redirect("http://localhost:3000/profile?token="+token);
-       }
-   );
+      }
+  );
 
+
+// Google Login
 router.get('/googlelogin', passport.authenticate('google', { scope:
     [ 'https://www.googleapis.com/auth/plus.me',
       'https://www.googleapis.com/auth/userinfo.email' ,
       'https://www.googleapis.com/auth/userinfo.profile'] }
 ));
-
-// the callback after google has authenticated the user
-router.get('/googlelogin/callback',
-passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    console.log(req.user);
-    // Authenticated successfully
-    var token = req.user.generateJwt();
-
-    res.redirect("http://localhost:3000/profile?token="+token);
-  });
+router.get('/googlelogin/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      var token = req.user.generateJwt();
+      res.redirect("http://localhost:3000/profile?token="+token);
+    }
+  );
 
 
-   // route for logging out
+// Logout
 router.get('/logout', function(req, res) {
   console.log("fiz logout");
   req.logout();

@@ -24,11 +24,10 @@ passport.use(new LocalStrategy({
   },
   function(username, password, done) {
     User.findOne({ email: username }, function (err, user) {
-      if (err)
-          return done(null, false,{
-            message: err
-          });
-          console.log(user.facebook.id)
+      if (err) {
+        return done(null, false,{message: err});
+      }
+
       if(user.facebook.id != undefined || user.google.id != undefined) { 
         return done(null,false, {
           message: 'You have registered with a social network, please log in with a social network'
@@ -54,7 +53,6 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use(new FacebookStrategy({
-
   //pull FB info
   clientID : configAuth.facebookAuth.clientID,
   clientSecret : configAuth.facebookAuth.clientSecret,
@@ -81,7 +79,10 @@ function(accessToken, email, refreshToken, profile, done) {
                     // if there is no user found with that facebook id, create them
                     var newUser = new User();
 
-                    newUser.email = profile.emails[0].value;
+
+                    console.log(profile);
+
+                    //newUser.email = profile.emails[0].value;
                     newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
                     newUser.profilePic = profile.photos[0].value;
                     // set all of the facebook information in our user model
