@@ -34,24 +34,14 @@
       }
     };
 
-    //Facebook modal
-    $scope.facebook = function(){
-      authentication.loginFacebook().error(function(err){
-        alert(err);
-      }).
-      then(function(){
-        $location.path('profile');
-      });
-    }
+    $scope.$on('event:social-sign-in-success', function(event, userDetails){
+      console.log(userDetails.token);
+      authentication.saveToken(userDetails.token);
+      $location.path('profile');
+    });
 
-    //Google modal
-    $scope.google = function(){
-      authentication.loginGoogle().error(function(err){
-        alert(err);
-      }).
-      then(function(){
-        $location.path('profile');
-      });
-    }
+    $scope.$on('event:social-sign-out-success', function(event, logoutStatus){
+      console.log(logoutStatus);
+    });
   }
 })();

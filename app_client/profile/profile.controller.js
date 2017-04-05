@@ -4,8 +4,8 @@
   .module('fooding')
   .controller('profileCtrl', profileCtrl);
 
-  profileCtrl.$inject = ['$scope','$route','$location','$http','meanData', '$window','authentication'];
-  function profileCtrl($scope, $route,$location,$http, meanData, $window, authentication) {
+  profileCtrl.$inject = ['$scope','$route','$location','$http','foodingData', '$window','authentication'];
+  function profileCtrl($scope, $route, $location, $http, foodingData, $window, authentication) {
 
     $scope.pageLoaded = false;
 
@@ -16,28 +16,24 @@
     else {
       if($route.current.params.token != undefined)
       {
-        meanData.setExternalToken($route.current.params.token);
+        foodingData.setExternalToken($route.current.params.token);
       }
 
-      var vm = this;
+      $scope.user = {};
 
-      vm.user = {};
-
-      meanData.getProfile()
+      foodingData.getProfile()
       .success(function(data) {
-        vm.user = data;
+        $scope.user = data;
         $scope.pageLoaded = true;
 
-        console.log(vm.user.skills);
-
         $scope.profile = {
-          email:  vm.user.email,
-          fullname: vm.user.name,
-          nickname: vm.user.nickname,
-          address: vm.user.address,
-          nif:vm.user.nif,
-          telephone:vm.user.telephone,
-          tags:vm.user.skills,
+          email:  $scope.user.email,
+          fullname: $scope.user.name,
+          nickname: $scope.user.nickname,
+          address: $scope.user.address,
+          nif: $scope.user.nif,
+          telephone: $scope.user.telephone,
+          tags: $scope.user.skills,
           paymentmethod:'nib'
         }
 
@@ -48,10 +44,9 @@
       });
     }
 
-    vm.logout = function()
+    $scope.logout = function()
     {
-      meanData.removeToken();
-      $route.current.params.token = "";
+      foodingData.removeToken();
       window.location = $window.location.protocol + "//" + $window.location.host + "/api/logout";
     }
 
@@ -64,7 +59,7 @@
 
     $scope.saveProfile = function()
     {
-      meanData.setProfile($scope.profile)
+      foodingData.setProfile($scope.profile)
       .success(function(data) {
         console.log(data);
       });

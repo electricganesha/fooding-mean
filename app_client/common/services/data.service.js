@@ -2,10 +2,10 @@
 
   angular
     .module('fooding')
-    .service('meanData', meanData);
+    .service('foodingData', foodingData);
 
-  meanData.$inject = ['$http', 'authentication'];
-  function meanData ($http, authentication) {
+  foodingData.$inject = ['$http', 'authentication'];
+  function foodingData ($http, authentication) {
 
     var setExternalToken = function(token)
     {

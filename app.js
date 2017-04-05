@@ -33,8 +33,6 @@ var files = [
   'app_client/home/home.controller.js',
   'app_client/events/events.controller.js',
   'app_client/profile/profile.controller.js',
-  'app_client/common/directives/navigation/navigation.controller.js',
-  'app_client/common/directives/navigation/navigation.directive.js',
   'app_client/auth/signin/signin.controller.js',
   'app_client/auth/register/register.controller.js'
 ];

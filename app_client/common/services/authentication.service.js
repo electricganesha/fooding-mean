@@ -4,21 +4,20 @@
     .module('fooding')
     .service('authentication', authentication);
 
-  authentication.$inject = ['$http', '$window'];
-  function authentication ($http, $window) {
+  authentication.$inject = ['$http', '$window', 'socialLoginService'];
+  function authentication ($http, $window, socialLoginService) {
 
     var saveToken = function (token) {
-      $window.localStorage['fooding-token'] = token;
+      $window.localStorage['token'] = token;
     };
 
     var getToken = function () {
-      return $window.localStorage['fooding-token'];
+      return $window.localStorage['token'];
     };
 
     var isLoggedIn = function() {
       var token = getToken();
       var payload;
-
       if(token){
         payload = token.split('.')[1];
         payload = $window.atob(payload);
@@ -55,16 +54,9 @@
       });
     };
 
-    loginFacebook = function(){
-      window.location = $window.location.protocol + "//" + $window.location.host + "/api/fblogin";
-    };
-
-    loginGoogle = function(){
-      window.location = $window.location.protocol + "//" + $window.location.host + "/api/googlelogin";
-    };
-
     logout = function() {
-      $window.localStorage.removeItem('fooding-token');
+      $window.localStorage.removeItem('token');
+      socialLoginService.logout();
     };
 
     return {
@@ -74,9 +66,7 @@
       isLoggedIn : isLoggedIn,
       register : register,
       login : login,
-      logout : logout,
-      loginFacebook : loginFacebook,
-      loginGoogle : loginGoogle
+      logout : logout
     };
   }
 

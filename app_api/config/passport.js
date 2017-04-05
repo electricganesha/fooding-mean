@@ -120,8 +120,6 @@ passport.use(new GoogleStrategy({
        process.nextTick(function() {
 
          console.log("dentro do google auth");
-
-         console.log(profile);
            // try to find the user based on their google id
            User.findOne({ 'google.id' : profile.id }, function(err, user) {
                if (err)
