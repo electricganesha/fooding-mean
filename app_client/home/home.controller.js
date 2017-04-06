@@ -9,7 +9,7 @@
       console.log('Home controller is running');
 
       if(authentication.getToken() != undefined) {
-        $location.path('profile');
+        $location.path('events');
       }
 
       $scope.loginPopup = function () {

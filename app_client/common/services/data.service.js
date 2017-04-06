@@ -47,11 +47,25 @@
         }
     };
 
+    var getAllEvents = function(dataToSend)
+    {
+      if(authentication.isLoggedIn()) {
+        return $http.get('/api/events', {
+          headers: {
+            Authorization: 'Bearer '+ authentication.getToken()
+          }
+        });
+      } else {
+        return false;
+      }
+    };
+
     return {
       setExternalToken : setExternalToken,
       removeToken : removeToken,
       getProfile : getProfile,
-      setProfile : setProfile
+      setProfile : setProfile,
+      getAllEvents : getAllEvents
     };
   }
 

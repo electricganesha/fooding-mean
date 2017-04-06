@@ -1,10 +1,5 @@
 var mongoose = require( 'mongoose' );
 
-var categorySchema = new mongoose.Schema({
-    title: String,
-    icon: String
-});
-
 var menuSchema = new mongoose.Schema({
     entree: String,
     first: String,
@@ -31,13 +26,14 @@ var eventsSchema = new mongoose.Schema({
     dateCreated: { type: Date, default: Date.now },
     dateOfEvent:  Date,
     owner: {
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Categories',
         required: true,
     },
     title: String,
     description: String,
     address: String,
-    category: [categorySchema],
+    category: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Categories' }],
     menu: [menuSchema],
     coverPhoto: String,
     attendeeLimit : Number,

@@ -29,7 +29,7 @@
             alert(err.message);
           })
           .then(function(){
-            $location.path('profile');
+            $location.path('events');
           });
       }
     };
@@ -41,7 +41,7 @@
             alert(err.message);
           })
           .then(function(){
-            $location.path('profile');
+            $location.path('events');
           });
     });
 
