@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
 
-var categorySchema = new mongoose.Schema(
-  {
-      name: {type:String, required:true},
-  }
-);
+var categorySchema = new mongoose.Schema({
+    title: { type: Date, default: Date.now },
+    dateOfEvent:  String,
+    icon: String
+});
 
-mongoose.model('Category', categorySchema);
+mongoose.model('Categories', categorySchema);

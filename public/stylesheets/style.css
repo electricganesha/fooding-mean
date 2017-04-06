@@ -1,8 +1,23 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+  margin: 0;
+	padding: 0;
+	border: 0;
+  height:100%
 }
 
-a {
-  color: #00B7FF;
+#navbar{
+  background-color: #030117;
+  color: white;
+  list-style-type: none;
+  height: 100vh;
 }
+
+#navbar ul{
+  list-style: none;
+}
+
+#navbar a{
+  background-color: #030117;
+  color: white;
+}
+

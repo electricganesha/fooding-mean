@@ -1,44 +1,33 @@
-(function() {
+(function () {
 
-angular.module('fooding', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+  angular.module('fooding', ['ngRoute','ngTagsInput', 'ui.bootstrap', 'socialLogin']);
 
-function config($routeProvider, $locationProvider)
-{
-  $routeProvider
-  .when('/', {
-    templateUrl: 'home/home.view.html',
-    controller: 'homeCtrl',
-    controllerAs: 'vm'
-    });/*
-  .when('/about', {
-    templateUrl: 'common/views/genericText.view.html',
-    controller: 'aboutCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/location/:locationid', {
-    templateUrl: '/locationDetail/location.view.html',
-    controller: 'locationDetailCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/register', {
-    templateUrl: '/auth/register/register.view.html',
-    controller: 'registerCtrl',
-    controllerAs: 'vm'
-  })
-  .when('/login',{
-    templateUrl: '/auth/login/login.view.html',
-    controller: 'loginCtrl',
-    controllerAs: 'vm'
-  })*/
-  //.otherwise({redirectTo: '/'});
+  function config ($routeProvider, $locationProvider, socialProvider) {
 
-  $locationProvider.html5Mode({
-    enabled:true,
-    requireBase: false
-  });
-}
+    $routeProvider
+      .when('/', {
+        templateUrl: 'home/home.view.html',
+        controller: 'homeCtrl'
+      })
+      .when('/events', {
+        templateUrl: '/events/events.view.html',
+        controller: 'eventsCtrl'
+      })
+      .when('/profile', {
+        templateUrl: '/profile/profile.view.html',
+        controller: 'profileCtrl'
+      })
+      .otherwise({redirectTo: '/'});
 
-angular.module('fooding')
-.config(['$routeProvider', '$locationProvider', config]);
+      socialProvider.setGoogleKey("416952599363-0bqkju4nen8h6ibe55a3snd1g52umivg.apps.googleusercontent.com");
+      socialProvider.setFbKey({appId: "183175235454114", apiVersion: "v2.8"});
 
-}) ();
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
+  }
+
+  angular
+    .module('fooding')
+    .config(['$routeProvider', '$locationProvider', 'socialProvider', config])
+
+})();
