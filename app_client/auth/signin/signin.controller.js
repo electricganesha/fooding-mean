@@ -35,8 +35,6 @@
     };
 
     $scope.$on('event:social-sign-in-success', function(event, userDetails){
-      /*authentication.saveToken(userDetails.token);
-      $location.path('profile');*/
       authentication
           .loginSocial(userDetails)
           .error(function(err){
