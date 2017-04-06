@@ -35,9 +35,16 @@
     };
 
     $scope.$on('event:social-sign-in-success', function(event, userDetails){
-      console.log(userDetails.token);
-      authentication.saveToken(userDetails.token);
-      $location.path('profile');
+      /*authentication.saveToken(userDetails.token);
+      $location.path('profile');*/
+      authentication
+          .loginSocial(userDetails)
+          .error(function(err){
+            alert(err.message);
+          })
+          .then(function(){
+            $location.path('profile');
+          });
     });
 
     $scope.$on('event:social-sign-out-success', function(event, logoutStatus){

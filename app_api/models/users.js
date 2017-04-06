@@ -20,27 +20,18 @@ var userSchema = new mongoose.Schema({
   },
   hash: String,
   salt: String,
+  provider: String,
   profilePic: String,
   profileBio: String,
   reputation: [reputationSchema],
   stars: Number,
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Events' }],
-  address:String,
-  telephone:String,
-  facebook :{
-    id : String,
-    token : String,
-    email : String,
-    name : String,
-    profilePic: String
-  },
-  google:{
-    id: String,
-    token: String,
-    name: String,
-    email: String,
-    profilePic: String
-  }
+  friends:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  photos:[String],
+  country: String
+  
 });
 
 userSchema.methods.setPassword = function(password){

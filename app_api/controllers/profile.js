@@ -35,7 +35,6 @@ module.exports.profileUpdate = function(req,res)
     setTimeout(function(){
       user.save(function(err,newuser){
         if(err){ console.log(err); }
-        console.log(newuser);
         res.json(newuser);
       });
     }, 3000);

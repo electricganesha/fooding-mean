@@ -33,54 +33,6 @@
         <input type="text" class="form-control" id="inputFullName" ng-model="profile.fullname" aria-describedby="fullNameHelp" value="{{ user.name }}" placeholder="Enter name">
         <small id="fullNameHelp" class="form-text text-muted">Nice name.</small>
       </div>
-      <div class="form-group">
-        <label for="inputNickname">Nickname</label>
-        <input type="text" class="form-control" id="inputNickname" ng-model="profile.nickname" aria-describedby="nicknameHelp" value="{{ user.nickname }}" placeholder="Enter nickname">
-        <small id="nicknameHelp" class="form-text text-muted">Is there another name you like to be called with?</small>
-      </div>
-      <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" ng-model="profile.address" aria-describedby="addressHelp" value="{{ user.address }}" placeholder="Enter address">
-        <small id="addressHelp" class="form-text text-muted">Where do you live?</small>
-      </div>
-      <div class="form-group">
-        <label for="inputNIF">NIF</label>
-        <input type="number" minlength="9" maxlength="9" ng-model="profile.nif" class="form-control" id="inputNIF" aria-describedby="nifHelp" value="{{ user.nif }}" placeholder="Enter your fiscal number">
-        <small id="nifHelp" class="form-text text-muted">We need this to pay you for your work</small>
-      </div>
-      <div class="form-group">
-        <label for="inputTelephone">Telephone</label>
-        <input type="number" minlength="9" maxlength="9" ng-model="profile.telephone" class="form-control" id="inputTelephone" aria-describedby="telephoneHelp" value="{{ user.telephone }}" placeholder="Enter your telephone number">
-        <small id="telephoneHelp" class="form-text text-muted">This is useful for us, so we can contact you.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleTextarea">Skills</label>
-        <tags-input ng-model="profile.tags" placeholder="Enter or choose your skills here.">
-          <auto-complete source="loadTags($query)"></auto-complete>
-        </tags-input>
-        <small id="emailHelp" class="form-text text-muted">Choose your skills. e.g. : HTML, Javascript, CSS...</small>
-      </div>
-      <fieldset class="form-group">
-        <legend>Payment Methods</legend>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ng-model="profile.paymentmethod" name="optionsRadios" id="optionsRadios1" value="nib" checked>
-            NIB - Bank Transfer
-          </label>
-        </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ng-model="profile.paymentmethod" name="optionsRadios" id="optionsRadios2" value="paypal">
-            Paypal
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ng-model="profile.paymentmethod" name="optionsRadios" id="optionsRadios3" value="btc" disabled>
-            BTC Wallet
-          </label>
-        </div>
-      </fieldset>
       <button type="submit" class="btn btn-primary">Save</button>
       <br>
       <br>

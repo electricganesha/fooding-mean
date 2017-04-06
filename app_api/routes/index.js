@@ -16,6 +16,7 @@ router.post('/profile', ctrlProfile.profileUpdate);
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+router.post('/loginsocial', ctrlAuth.loginSocial);
 
 // Logout
 router.get('/logout', function(req, res) {

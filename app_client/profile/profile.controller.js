@@ -29,12 +29,6 @@
         $scope.profile = {
           email:  $scope.user.email,
           fullname: $scope.user.name,
-          nickname: $scope.user.nickname,
-          address: $scope.user.address,
-          nif: $scope.user.nif,
-          telephone: $scope.user.telephone,
-          tags: $scope.user.skills,
-          paymentmethod:'nib'
         }
 
         $scope.profile.tags = [];

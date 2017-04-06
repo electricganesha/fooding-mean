@@ -42,19 +42,25 @@
       }
     };
 
-    register = function(user) {
+    var register = function(user) {
       return $http.post('/api/register', user).success(function(data){
         saveToken(data.token);
       });
     };
 
-    login = function(user) {
+    var login = function(user) {
       return $http.post('/api/login', user).success(function(data) {
         saveToken(data.token);
       });
     };
 
-    logout = function() {
+    var loginSocial = function(user) {
+      return $http.post('/api/loginsocial', user).success(function(data) {
+        saveToken(data.token);
+      });
+    };
+
+    var logout = function() {
       $window.localStorage.removeItem('token');
       socialLoginService.logout();
     };
@@ -66,6 +72,7 @@
       isLoggedIn : isLoggedIn,
       register : register,
       login : login,
+      loginSocial : loginSocial,
       logout : logout
     };
   }
