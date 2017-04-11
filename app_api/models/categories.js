@@ -1,8 +1,7 @@
 var mongoose = require( 'mongoose' );
 
 var categorySchema = new mongoose.Schema({
-    title: { type: Date, default: Date.now },
-    dateOfEvent:  String,
+    title: { type: String, required: true },
     icon: String
 });
 

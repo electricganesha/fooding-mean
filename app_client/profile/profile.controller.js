@@ -7,35 +7,17 @@
   profileCtrl.$inject = ['$scope','$route','$location','$http','foodingData', '$window','authentication'];
   function profileCtrl($scope, $route, $location, $http, foodingData, $window, authentication) {
 
-    $scope.pageLoaded = false;
-
-    if($route.current.params.token == undefined && !authentication.isLoggedIn())
-    {
-      window.location = $window.location.protocol + "//" + $window.location.host + "/";
-    }
-    else {
-      if($route.current.params.token != undefined)
-      {
-        foodingData.setExternalToken($route.current.params.token);
-      }
-
-      $scope.user = {};
-
-      foodingData.getProfile()
-      .success(function(data) {
-        $scope.user = data;
-        $scope.pageLoaded = true;
-
-        $scope.profile = {
-          email:  $scope.user.email,
-          fullname: $scope.user.name,
-        }
-
-        $scope.profile.tags = [];
-      })
-      .error(function (e) {
-        console.log(e);
-      });
+    if(authentication.isLoggedIn()) {
+        foodingData.getProfile()
+        .then(function(data) {
+            $scope.name = data.data.name;
+            $scope.email = data.data.email;
+        })
+        .catch(function (e) {
+            console.log(e);
+        });
+      } else {
+        return false;
     }
 
     $scope.logout = function()

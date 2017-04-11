@@ -3,8 +3,7 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
 var reputationSchema = new mongoose.Schema({
-    upVotes: Number,
-    downVotes: Number
+    
 });
 
 
@@ -23,8 +22,9 @@ var userSchema = new mongoose.Schema({
   provider: String,
   profilePic: String,
   profileBio: String,
-  reputation: [reputationSchema],
-  stars: Number,
+  upVotes: { type: Number, default: 0 },
+  downVotes: { type: Number, default: 0 },
+  stars : { type: Number, min: 0, max: 5, default: 0},
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Events' }],
   friends:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],

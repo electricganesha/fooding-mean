@@ -1,12 +1,33 @@
 <div class="col-sm-3 col-lg-2" id = "navbar">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12" style="padding-top:30px; text-align:center;">
+      <h1>Fooding</h1>
+    </div>
+    <div class="col-sm-12 col-lg-12" style="padding-top:30px; height:85px;">
+      <div class="row">
+        <div class="col-sm-7 col-lg-7" id="infoUser" >
+          <p style="margin:0;">{{name}}</p>
+          <span class="glyphicon glyphicon-star{{ stars<5 ? '' : ' full'}}"></span>
+          <span class="glyphicon glyphicon-star{{ stars<4 ? '' : ' full'}}"></span>
+          <span class="glyphicon glyphicon-star{{ stars<3 ? '' : ' full'}}"></span>
+          <span class="glyphicon glyphicon-star{{ stars<2 ? '' : ' full'}}"></span>
+          <span class="glyphicon glyphicon-star{{ stars<1 ? '' : ' full'}}"></span>
+          <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{upVotes}}</p>
+        </div>
+        <div class="col-sm-5 col-lg-5" ng-cloak>
+          <div id="profilePic" ng-if="profilePic" ng-style="{'background-image':'url({{profilePic}})'}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <nav class="navbar navbar-fixed-side">
-    <!-- normal collapsible navbar markup -->
     <ul>
-      <li class="active"><a href="#">Events</a></li>
-      <li><a ng-click="newEventPopup()">New Event</a></li>
-      <li><a href="#">Menu Item 3</a></li>
-      <li><a href="#">Menu Item 4</a></li>
-      <li><a href="#">Reviews <span class="badge">1,118</span></a>
+      <a ui-sref="events" ui-sref-active="active"><li>FOODINGS</li></a>
+      <a ng-click="newEventPopup()"><li>CREATE FOODING</li></a>
+      <a href="#"><li>FOLLOWING</li></a>
+      <a ui-sref="myfoodings" ui-sref-active="active"><li>MY FOODINGS</li></a>
+      <a href="/profile"><li>SETTINGS</li></a>
     </ul>
   </nav>
 </div>

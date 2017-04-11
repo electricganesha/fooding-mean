@@ -11,8 +11,16 @@
       $window.localStorage['token'] = token;
     };
 
+    var saveUserId = function (id) {
+      $window.localStorage['userId'] = id;
+    };
+
     var getToken = function () {
       return $window.localStorage['token'];
+    };
+
+    var getUserId = function () {
+      return $window.localStorage['userId'];
     };
 
     var isLoggedIn = function() {
@@ -22,7 +30,6 @@
         payload = token.split('.')[1];
         payload = $window.atob(payload);
         payload = JSON.parse(payload);
-        console.log(payload.exp > Date.now() / 1000)
         return payload.exp > Date.now() / 1000;
       } else {
         return false;
@@ -43,32 +50,50 @@
     };
 
     var register = function(user) {
-      return $http.post('/api/register', user).success(function(data){
-        saveToken(data.token);
-      });
+      return $http.post('/api/register', user)
+        .then(function(data){
+          saveToken(data.data.token);
+          saveUserId(data.data.userId);
+        })
+        .catch(function(e) {
+          console.log(e);
+        });
     };
 
     var login = function(user) {
-      return $http.post('/api/login', user).success(function(data) {
-        saveToken(data.token);
-      });
+      return $http.post('/api/login', user)
+        .then(function(data) {
+          saveToken(data.data.token);
+          saveUserId(data.data.userId);
+        })
+        .catch(function(e) {
+          console.log(e);
+        });
     };
 
     var loginSocial = function(user) {
-      return $http.post('/api/loginsocial', user).success(function(data) {
-        saveToken(data.token);
-      });
+      return $http.post('/api/loginsocial', user)
+        .then(function(data) {
+          saveToken(data.data.token);
+          saveUserId(data.data.userId);
+        })
+        .catch(function(e) {
+          console.log(e);
+        });
     };
 
     var logout = function() {
       $window.localStorage.removeItem('token');
+      $window.localStorage.removeItem('userId');
       socialLoginService.logout();
     };
 
     return {
       currentUser : currentUser,
       saveToken : saveToken,
+      saveUserId : saveUserId,
       getToken : getToken,
+      getUserId : getUserId,
       isLoggedIn : isLoggedIn,
       register : register,
       login : login,

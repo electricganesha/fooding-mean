@@ -22,12 +22,17 @@ router.post('/loginsocial', ctrlAuth.loginSocial);
 // Events
 router.get('/events', auth, ctrlEvents.eventList); //get all events
 router.post('/events', ctrlEvents.eventCreate); //create a new event
+router.get('/events/:userId', auth, ctrlEvents.eventByUserId); //get all events from user id
+router.get('/event/:eventId', auth, ctrlEvents.eventReadOne); //get project by id and owner information
 /*router.get('/getBestProjects', ctrlProjects.getBestProjects); //get last 6 best projects
 router.get('/getProjectsByCategory/:category', ctrlProjects.getProjectsByCategory); //get last 6 best projects
 router.get('/getProjectsBySubCategory/:subcategories', ctrlProjects.getProjectsBySubCategory); //get last 6 best projects
-router.get('/projects/:projectId', ctrlProjects.projectsReadOne); //get project by id
 router.put('/projects/:projectId', ctrlProjects.projectsUpdateOne); //edit project by id
 router.delete('/projects/:projectId', ctrlProjects.projectsDeleteOne); //delete project by id*/
+
+// Categories
+router.get('/categories', auth, ctrlEvents.eventList); //get all events
+router.post('/categories', ctrlEvents.eventCreate); //create a new event
 
 
 // Logout

@@ -7,7 +7,7 @@
     homeCtrl.$inject = ['$scope', '$location', 'authentication', '$uibModal'];
     function homeCtrl ($scope, $location, authentication, $uibModal) {
       console.log('Home controller is running');
-
+      $scope.home=true;
       if(authentication.getToken() != undefined) {
         $location.path('events');
       }

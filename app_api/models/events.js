@@ -24,10 +24,11 @@ var postSchema = new mongoose.Schema({
 
 var eventsSchema = new mongoose.Schema({
     dateCreated: { type: Date, default: Date.now },
-    dateOfEvent:  Date,
+    startDate:  { type: Date, required: true },
+    endDate:  { type: Date, required: true },
     owner: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Categories',
+        ref: 'User',
         required: true,
     },
     title: String,

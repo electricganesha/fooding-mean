@@ -60,12 +60,40 @@
       }
     };
 
+    var getAllEventsFromUser = function(id)
+    {
+      if(authentication.isLoggedIn()) {
+        return $http.get('/api/events/' + id, {
+          headers: {
+            Authorization: 'Bearer '+ authentication.getToken()
+          }
+        });
+      } else {
+        return false;
+      }
+    };
+
+    var getEventById = function(id)
+    {
+      if(authentication.isLoggedIn()) {
+        return $http.get('/api/event/' + id, {
+          headers: {
+            Authorization: 'Bearer '+ authentication.getToken()
+          }
+        });
+      } else {
+        return false;
+      }
+    };
+
     return {
       setExternalToken : setExternalToken,
       removeToken : removeToken,
       getProfile : getProfile,
       setProfile : setProfile,
-      getAllEvents : getAllEvents
+      getAllEvents : getAllEvents,
+      getAllEventsFromUser : getAllEventsFromUser,
+      getEventById : getEventById
     };
   }
 

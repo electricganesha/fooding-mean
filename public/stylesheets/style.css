@@ -2,22 +2,187 @@ body{
   margin: 0;
 	padding: 0;
 	border: 0;
-  height:100%
+  height:100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7efdf;
 }
 
+/*Navigation Tab styles*/
+
 #navbar{
-  background-color: #030117;
+  background-color: #182528;
   color: white;
   list-style-type: none;
   height: 100vh;
+  padding: 0;
+  position: fixed;
 }
 
 #navbar ul{
   list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+#navbar ul a{
+  text-decoration: none;
+}
+
+#navbar ul li{
+  background: #182528; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#1c292c , #182528); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#1c292c , #182528); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#1c292c , #182528); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#1c292c , #182528); /* Standard syntax */
+  height: 60px;
+  text-align: right;
+  padding-right: 20px;
+  font-size: 18px;
+  line-height: 60px;
+  -webkit-transition: background 0.2s linear;
+    -moz-transition: background 0.2s linear;
+    -o-transition: background 0.2s linear;
+    transition: background 0.2s linear;
+}
+
+
+#navbar ul li:hover{
+  cursor:pointer;
+  background: #f7c04b;
+  color:#182528;
+}
+
+#navbar ul .active li{
+  cursor:pointer;
+  background: #f7c04b;
+  color:#182528;
 }
 
 #navbar a{
-  background-color: #030117;
+  color: #f7c04b;
+  -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+}
+
+#profilePic {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+#infoUser{
+  font-size: 12px;
+  text-align: right;
+  padding: 0;
+}
+
+/*Events Page Styles */
+
+#preContentEvent{
+  background-image: url('http://lorempixel.com/400/400/food/'); 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  color: #f7efdf;
+}
+
+#preContentEvent:after {
+  content: " ";
+  z-index: 1;
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#preContentTopDiv{
+  position: relative;
+  z-index: 2;
+  height: 33%;
+}
+
+#profilePicEvent{
+  display: inline-block;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+#ownerPic{
+  text-align: right;
+  padding-right: 5px;
+  padding-top: 20px;
+}
+
+#ownerInfo{
+  color: white;
+  font-size: 16px;
+  text-align: right;
+  padding-top: 15px;
+}
+
+#dateEventInfo{
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  padding-top: 15px;
+}
+#dateEvent{
+  font-size: 20px;
+}
+
+#preContentCenterDiv{
+  position: relative;
+  z-index: 2;
+  height: 33%;
+}
+
+#preContentBottomDiv{
+  position: relative;
+  z-index: 2;
+  height: 33%;
+}
+
+#titleEvent{
+  color:#f7c04b;
+  font-size: 22px;
+}
+
+#descriptionEvent{
+  color: white;
+  font-size: 18px;
+}
+
+.glyphicon-star{
   color: white;
 }
+
+.full{
+  color:#f7c04b;
+}
+
+#dateOptions{
+  font-size:14px;
+}
+
+#attendeesNumber{
+  font-size: 16px;
+}
+
+
 
