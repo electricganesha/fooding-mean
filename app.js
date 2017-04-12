@@ -35,6 +35,7 @@ var files = [
   'app_client/home/home.controller.js',
   'app_client/events/events.controller.js',
   'app_client/events/newevent.controller.js',
+  'app_client/eventpopup/eventpopup.controller.js',
   'app_client/myevents/myevents.controller.js',
   'app_client/profile/profile.controller.js',
   'app_client/auth/signin/signin.controller.js',

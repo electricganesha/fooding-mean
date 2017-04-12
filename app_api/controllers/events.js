@@ -8,7 +8,6 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.eventList = function(req, res) {
   Event.find({}).populate('owner').sort('-dateOfEvent').exec(function(err, events) {
-    console.log(events);
     res.json(events);
   });
 };

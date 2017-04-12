@@ -19,6 +19,19 @@
         $scope.message = "Sorry, something's gone wrong, please try again later";
       });
 
+      $scope.eventPopup = function(id){
+          $uibModal.open({
+            templateUrl:'/eventpopup/eventpopup.view.html',
+            controller: 'eventpopupCtrl',
+            resolve: {
+              eventId: function() {
+                  return id
+              }
+            },
+            size: 'lg'
+          })
+      }
+
     }
 
 })();

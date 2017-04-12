@@ -4,8 +4,8 @@
           <div class="row">
               <div class="col-lg-12">
                   <div class="row">
-                    <div class="col-lg-4" style="height:27.5vw; padding: 2px;" ng-repeat="event in events track by $index">
-                        <div id="preContentEvent">
+                    <div class="col-lg-4" style="height:27.5vw; padding: 2px; cursor:pointer;" ng-repeat="event in events track by $index">
+                        <div id="preContentEvent" ng-click="eventPopup(event._id)">
                             <div id="preContentTopDiv">
                                 <div class="row" style="margin: 0;">
                                     <div class="col-sm-4 col-lg-4" id="dateEventInfo">
@@ -43,7 +43,7 @@
                                          {{event.attendeeLimit}}
                                     </div>
                                     <div class="col-sm-4 col-lg-4" style="text-align:right; padding-right:35px;">
-                                        <p id="attendeesNumber"><span class="glyphicon glyphicon-user" style="color: #white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                                        <p id="attendeesNumber"><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
                                     </div>
                                 </div>
                             </div>

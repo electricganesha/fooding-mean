@@ -1,0 +1,58 @@
+<div class="modal-content" style="border:0; background: #f7efdf;">
+    <form ng-submit="onSubmit()">
+        <div class="modal-body" style="padding-top:0; padding-bottom:0;">
+           <div class="row">
+                <div class="col-md-3" style="border: solid 2px red;">
+                    <p>Menu<p>
+                </div>
+                <div class="col-md-9" style="padding:0;">
+                    <div id="popupTopDivEvent">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6" id="datePopupEventInfo">
+                                <p id="dateEventPopup">{{event.startDate | date : 'dd/MM/yyyy'}}</p>
+                                <p id="dateOptionsPopup" style="margin:0;">{{event.startDate | date : 'EEEE'}}</p>
+                                <p id="dateOptionsPopup">{{event.startDate | date : 'HH:mm'}}/{{event.endDate | date : 'HH:mm'}}</p>
+                            </div>
+                            <div class="col-sm-6 col-lg-6" style="position: relative; z-index: 2; padding-top: 15px;">
+                                <div class="col-sm-8 col-lg-8" id="ownerInfoPopup" >
+                                    <p style="margin:0;">{{event.owner.name}}</p>
+                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<5 ? '' : ' full'}}"></span>
+                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<4 ? '' : ' full'}}"></span>
+                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<3 ? '' : ' full'}}"></span>
+                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<2 ? '' : ' full'}}"></span>
+                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<1 ? '' : ' full'}}"></span>
+                                    <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{event.owner.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{event.owner.upVotes}}</p>
+                                </div>
+                                <div class="col-sm-4 col-lg-4" id="ownerPicPopup">
+                                    <div id="profilePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="popupDivEvent">
+                        <div class="row" style="margin:0; height: 100%;">
+                            <div class="col-sm-7 col-lg-7" style="position: relative; z-index: 2; padding-left: 0; padding-right: 1px; height: 100%;" >
+                                <div id="popupEventInfo"  style="background: #182528;">
+                                    <p id="titleEventPopup">{{event.title}}</p>
+                                    <p id="descriptionEventPop">{{event.description}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-lg-5" style="position: relative; z-index: 2; padding-left: 1px; padding-right: 0px; height: 100%;">
+                                <div id="popupEventInfo"  style="background: #182528;">
+                                    <div class="row" style="margin: 0;">
+                                        <div class="col-sm-6 col-lg-6" style="padding-right:35px;">
+                                            <p><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6" style="text-align:right; color:#f7c04b;">
+                                            <p>Guests</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </form>
+</div>
