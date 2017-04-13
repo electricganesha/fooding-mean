@@ -62,6 +62,7 @@ module.exports.eventReadOne = function(req, res) {
   if (req.params && req.params.eventId) {
     Event.find({_id: req.params.eventId})
     .populate('owner')
+    .populate('attendees')
     .exec(function(err, events) {
       if (!events) {
         sendJSONresponse(res, 404, {
@@ -72,6 +73,7 @@ module.exports.eventReadOne = function(req, res) {
         sendJSONresponse(res, 404, err);
         return;
       }
+      console.log(events[0]);
       sendJSONresponse(res, 200, events);
     });
   } else {

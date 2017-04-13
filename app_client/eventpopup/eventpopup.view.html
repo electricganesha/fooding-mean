@@ -2,8 +2,31 @@
     <form ng-submit="onSubmit()">
         <div class="modal-body" style="padding-top:0; padding-bottom:0;">
            <div class="row">
-                <div class="col-md-3" style="border: solid 2px red;">
-                    <p>Menu<p>
+                <div class="col-md-3" style=" text-align:center;">
+                    <br>
+                    <img width="85px" src="icons/chef_hat.png"></img>
+                    <p><b>MENU</b><p>
+                    <br>
+                    <div ng-if="event.menu[0].entree !=''">
+                        <p>{{event.menu[0].entree}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].first !=''">
+                        <br>
+                        <p>{{event.menu[0].first}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].second !=''">
+                        <br>
+                        <p>{{event.menu[0].second}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].dessert !=''">
+                        <br>
+                        <p>{{event.menu[0].dessert}}<p>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                        <p><b>Notes and warnings</b><p>
+                    </div>
                 </div>
                 <div class="col-md-9" style="padding:0;">
                     <div id="popupTopDivEvent">
@@ -31,20 +54,38 @@
                     </div>
                     <div id="popupDivEvent">
                         <div class="row" style="margin:0; height: 100%;">
-                            <div class="col-sm-7 col-lg-7" style="position: relative; z-index: 2; padding-left: 0; padding-right: 1px; height: 100%;" >
-                                <div id="popupEventInfo"  style="background: #182528;">
+                            <div class="col-sm-12 col-lg-12" style="position: relative; z-index: 2; padding: 0; padding-bottom: 1px;" >
+                                <div id="popupEventDivLeft"  style="background: #182528;">
                                     <p id="titleEventPopup">{{event.title}}</p>
                                     <p id="descriptionEventPop">{{event.description}}</p>
                                 </div>
                             </div>
-                            <div class="col-sm-5 col-lg-5" style="position: relative; z-index: 2; padding-left: 1px; padding-right: 0px; height: 100%;">
-                                <div id="popupEventInfo"  style="background: #182528;">
-                                    <div class="row" style="margin: 0;">
-                                        <div class="col-sm-6 col-lg-6" style="padding-right:35px;">
-                                            <p><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                            <div class="col-sm-12 col-lg-12" style="position: relative; z-index: 2; padding: 0; padding-top: 1px;">
+                                <div id="popupEventDivRight"  style="background: #182528;">
+                                    <div style="font-size: 12px;">
+                                        <div class="row" style="margin: 0;">
+                                            <div class="col-sm-6 col-lg-6" style="padding-right:35px;">
+                                                <p><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-6" style="text-align:right; color:#f7c04b;">
+                                                <p>Guests</p>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6 col-lg-6" style="text-align:right; color:#f7c04b;">
-                                            <p>Guests</p>
+                                    </div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-12" style="padding: 0; margin-top:20px;">
+                                                <div class="col-sm-2 col-lg-2" id="attendeeInfo" style="cursor:pointer;" ng-repeat="attendee in event.attendees track by $index">
+                                                    <div id="attendeePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                                    <p style="margin:0;">{{attendee.name}}</p>
+                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<5 ? '' : ' full'}}"></span>
+                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<4 ? '' : ' full'}}"></span>
+                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<3 ? '' : ' full'}}"></span>
+                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<2 ? '' : ' full'}}"></span>
+                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<1 ? '' : ' full'}}"></span>
+                                                    <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{attendee.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{attendee.upVotes}}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

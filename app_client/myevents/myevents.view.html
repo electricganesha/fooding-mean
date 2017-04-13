@@ -1,12 +1,53 @@
-<div class="col-sm-9 col-lg-10" style="padding:0; margin-left: 16.69%; ">
+<div class="col-sm-9 col-lg-10" style="padding:0; margin-left: 16.69%;">
   <div id="page-content-wrapper">
       <div class="container-fluid">
           <div class="row">
               <div class="col-lg-12">
                   <div class="row">
-                    <div class="col-lg-4" ng-repeat="event in events track by $index">
-                        <h1>{{event.title}}</h1>
-                        <p>{{event.description}}</p>
+                    <div class="col-lg-4" style="height:27.5vw; padding: 2px; cursor:pointer;" ng-repeat="event in events track by $index">
+                        <div id="preContentEvent" ng-click="eventPopup(event._id)">
+                            <div id="preContentTopDiv">
+                                <div class="row" style="margin: 0;">
+                                    <div class="col-sm-4 col-lg-4" id="dateEventInfo">
+                                        <p id="dateEvent">{{event.startDate | date : 'dd/MM/yyyy'}}</p>
+                                        <p id="dateOptions" style="margin:0;">{{event.startDate | date : 'EEEE'}}</p>
+                                        <p id="dateOptions">{{event.startDate | date : 'HH:mm'}}/{{event.endDate | date : 'HH:mm'}}</p>
+                                    </div>
+                                    <div class="col-sm-8 col-lg-8">
+                                        <div class="col-sm-8 col-lg-8" id="ownerInfo" >
+                                            <p style="margin:0;">{{event.owner.name}}</p>
+                                            <span class="glyphicon glyphicon-star{{ event.owner.stars<5 ? '' : ' full'}}"></span>
+                                            <span class="glyphicon glyphicon-star{{ event.owner.stars<4 ? '' : ' full'}}"></span>
+                                            <span class="glyphicon glyphicon-star{{ event.owner.stars<3 ? '' : ' full'}}"></span>
+                                            <span class="glyphicon glyphicon-star{{ event.owner.stars<2 ? '' : ' full'}}"></span>
+                                            <span class="glyphicon glyphicon-star{{ event.owner.stars<1 ? '' : ' full'}}"></span>
+                                            <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{event.owner.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{event.owner.upVotes}}</p>
+                                        </div>
+                                        <div class="col-sm-4 col-lg-4" id="ownerPic">
+                                            <div id="profilePicEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="preContentCenterDiv">
+                                <div class="row" style="margin: 0;">
+                                    <div class="col-sm-10 col-lg-10" id="eventInfo">
+                                        <p id="titleEvent">{{event.title}}</p>
+                                        <p id="descriptionEvent">{{event.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="preContentBottomDiv">
+                                <div class="row" style="margin: 0; position: absolute; bottom: 0; width: 100%;">
+                                    <div class="col-sm-8 col-lg-8">
+                                         {{event.attendeeLimit}}
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4" style="text-align:right; padding-right:35px;">
+                                        <p id="attendeesNumber"><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <div>
                     </div>
                 </div>
               </div>
