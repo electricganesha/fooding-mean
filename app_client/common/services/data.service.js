@@ -17,10 +17,24 @@
       authentication.logout();
     }
 
-    var getProfile = function () {
+    var getMyProfile = function () {
       if(authentication.isLoggedIn())
       {
       return $http.get('/api/profile', {
+        headers: {
+          Authorization: 'Bearer '+ authentication.getToken()
+        }
+      });
+      }
+      else {
+        return false;
+      }
+    };
+
+    var getUserProfile = function (userId) {
+      if(authentication.isLoggedIn())
+      {
+      return $http.get('/api/profile/' + userId, {
         headers: {
           Authorization: 'Bearer '+ authentication.getToken()
         }
@@ -89,7 +103,8 @@
     return {
       setExternalToken : setExternalToken,
       removeToken : removeToken,
-      getProfile : getProfile,
+      getMyProfile : getMyProfile,
+      getUserProfile : getUserProfile,
       setProfile : setProfile,
       getAllEvents : getAllEvents,
       getAllEventsFromUser : getAllEventsFromUser,

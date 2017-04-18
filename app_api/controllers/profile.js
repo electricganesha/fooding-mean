@@ -16,6 +16,14 @@ module.exports.profileRead = function(req, res) {
 
 };
 
+module.exports.profileReadOne = function(req, res) {
+    User
+    .findById(req.params.userId)
+    .exec(function(err, user) {
+      res.status(200).json(user);
+    });
+};
+
 module.exports.profileUpdate = function(req,res)
 {
 

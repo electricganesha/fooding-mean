@@ -8,7 +8,7 @@
   function profileCtrl($scope, $route, $location, $http, foodingData, $window, authentication) {
 
     if(authentication.isLoggedIn()) {
-        foodingData.getProfile()
+        foodingData.getMyProfile()
         .then(function(data) {
             $scope.name = data.data.name;
             $scope.email = data.data.email;

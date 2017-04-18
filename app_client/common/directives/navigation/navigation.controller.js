@@ -9,8 +9,9 @@
       console.log('Navigation controller is running');
 
       if(authentication.isLoggedIn()) {
-        foodingData.getProfile()
+        foodingData.getMyProfile()
         .then(function(data) {
+            $scope.userId = data.data._id;
             $scope.name = data.data.name;
             $scope.profilePic = data.data.profilePic;
             $scope.stars = data.data.stars;
@@ -22,14 +23,6 @@
         });
       } else {
         return false;
-      }
-
-       $scope.newEventPopup = function () {
-        $uibModal.open({
-          templateUrl:'/events/newevent.view.html',
-          controller: 'newEventCtrl',
-          size: 'lg'
-        })
       }
 
     }

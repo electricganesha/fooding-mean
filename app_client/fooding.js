@@ -2,26 +2,7 @@
 
   angular.module('fooding', ['ngRoute','ngTagsInput', 'ui.bootstrap', 'socialLogin' ,'ui.router']);
 
-  function config ($stateProvider, $urlRouterProvider, $routeProvider, $locationProvider, socialProvider) {
-
-    /*$routeProvider
-      .when('/', {
-        templateUrl: 'home/home.view.html',
-        controller: 'homeCtrl'
-      })
-      .when('/events', {
-        templateUrl: '/events/events.view.html',
-        controller: 'eventsCtrl'
-      })
-      .when('/myfoodings', {
-        templateUrl: '/myevents/myevents.view.html',
-        controller: 'myEventsCtrl'
-      })
-      .when('/profile', {
-        templateUrl: '/profile/profile.view.html',
-        controller: 'profileCtrl'
-      })
-      .otherwise({redirectTo: '/'});*/
+  function config ($stateProvider, $urlRouterProvider, $locationProvider, socialProvider) {
 
        $stateProvider
         .state('home', {
@@ -42,7 +23,20 @@
             },
             content: {
               templateUrl: '/events/events.view.html',
-              controller: 'eventsCtrl',
+              controller: 'eventsCtrl'
+            }
+          } 
+        })
+        .state('newevent', {
+          url: '/newevent',
+          views: {
+            nav: {
+              templateUrl: '/common/directives/navigation/navigation.template.html',
+              controller: 'navigationCtrl'
+            },
+            content: {
+              templateUrl:'/events/newevent.view.html',
+              controller: 'newEventCtrl'
             }
           } 
         })
@@ -71,6 +65,19 @@
               controller: 'profileCtrl'
             }
           } 
+        })
+        .state('user', {
+          url: '/user/:userId',
+          views: {
+            nav: {
+              templateUrl: '/common/directives/navigation/navigation.template.html',
+              controller: 'navigationCtrl'
+            },
+            content: {
+              templateUrl: '/user/user.view.html',
+              controller: 'userCtrl'
+            }
+          } 
         });
       $urlRouterProvider.otherwise('/');
 
@@ -83,6 +90,6 @@
 
   angular
     .module('fooding')
-    .config(['$stateProvider', '$urlRouterProvider', '$routeProvider', '$locationProvider', 'socialProvider', config])
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'socialProvider', config])
 
 })();

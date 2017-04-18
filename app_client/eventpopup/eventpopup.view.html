@@ -26,29 +26,37 @@
                     <br>
                     <div>
                         <p><b>Notes and warnings</b><p>
+                        <div ng-if="event.notes != undefined">
+                            <p>{{event.notes}}</p>
+                        </div>
+                        <div ng-if="event.notes == undefined">
+                            <p>No notes available</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-9" style="padding:0;">
                     <div id="popupTopDivEvent">
                         <div class="row">
-                            <div class="col-sm-6 col-lg-6" id="datePopupEventInfo">
+                            <div class="col-sm-8 col-lg-8" id="datePopupEventInfo">
                                 <p id="dateEventPopup">{{event.startDate | date : 'dd/MM/yyyy'}}</p>
                                 <p id="dateOptionsPopup" style="margin:0;">{{event.startDate | date : 'EEEE'}}</p>
                                 <p id="dateOptionsPopup">{{event.startDate | date : 'HH:mm'}}/{{event.endDate | date : 'HH:mm'}}</p>
                             </div>
-                            <div class="col-sm-6 col-lg-6" style="position: relative; z-index: 2; padding-top: 15px;">
-                                <div class="col-sm-8 col-lg-8" id="ownerInfoPopup" >
-                                    <p style="margin:0;">{{event.owner.name}}</p>
-                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<5 ? '' : ' full'}}"></span>
-                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<4 ? '' : ' full'}}"></span>
-                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<3 ? '' : ' full'}}"></span>
-                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<2 ? '' : ' full'}}"></span>
-                                    <span class="glyphicon glyphicon-star{{ event.owner.stars<1 ? '' : ' full'}}"></span>
-                                    <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{event.owner.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{event.owner.upVotes}}</p>
-                                </div>
-                                <div class="col-sm-4 col-lg-4" id="ownerPicPopup">
-                                    <div id="profilePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
-                                </div>
+                            <div class="col-sm-4 col-lg-4" style="position: relative; z-index: 2; padding-top: 15px;">
+                                <a id="popupUserLink" href="/user/{{event.owner._id}}" ng-click="closePopup()" style="text-decoration:none;">
+                                    <div class="col-sm-6 col-lg-6" id="ownerInfoPopup" >
+                                        <p id="attendeeName" style="margin:0;">{{event.owner.name}}</p>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<5 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<4 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<3 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<2 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<1 ? '' : ' full'}}"></span>
+                                        <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{event.owner.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{event.owner.upVotes}}</p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6" id="ownerPicPopup">
+                                        <div id="profilePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -75,15 +83,22 @@
                                     <div>
                                         <div class="row">
                                             <div class="col-sm-12 col-lg-12" style="padding: 0; margin-top:20px;">
-                                                <div class="col-sm-2 col-lg-2" id="attendeeInfo" style="cursor:pointer;" ng-repeat="attendee in event.attendees track by $index">
-                                                    <div id="attendeePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
-                                                    <p style="margin:0;">{{attendee.name}}</p>
-                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<5 ? '' : ' full'}}"></span>
-                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<4 ? '' : ' full'}}"></span>
-                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<3 ? '' : ' full'}}"></span>
-                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<2 ? '' : ' full'}}"></span>
-                                                    <span class="glyphicon glyphicon-star{{ attendee.stars<1 ? '' : ' full'}}"></span>
-                                                    <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{attendee.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{attendee.upVotes}}</p>
+                                                <div ng-if="event.length != 0">
+                                                    <a class="col-sm-2 col-lg-2" id="popupUserLink" href="/user/{{attendee._id}}" ng-click="closePopup()" style="color: #f7efdf; text-decoration:none;" ng-repeat="attendee in event.attendees track by $index">
+                                                        <div id="attendeeInfo" style="cursor:pointer;">
+                                                            <div id="attendeePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                                            <p id="attendeeName" style="margin:0;">{{attendee.name}}</p>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<5 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<4 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<3 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<2 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<1 ? '' : ' full'}}"></span>
+                                                            <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{attendee.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{attendee.upVotes}}</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div ng-if="event.notes == undefined" style="text-align:center;">
+                                                    <p>No guests yet</p>
                                                 </div>
                                             </div>
                                         </div>

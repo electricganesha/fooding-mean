@@ -20,7 +20,8 @@
       });
 
       $scope.eventPopup = function(id){
-          $uibModal.open({
+          var modalInstance = $uibModal.open({
+            animation: true,
             templateUrl:'/eventpopup/eventpopup.view.html',
             controller: 'eventpopupCtrl',
             resolve: {
@@ -29,9 +30,17 @@
               }
             },
             size: 'lg'
-          })
+          });
+
+          modalInstance.result.then(function (selectedItem) {
+            console.log(selectedItem);
+          }, function () {
+          });
       }
 
+      $scope.childHandler = function ($event) {
+        $event.stopPropagation();
+      };
     }
 
 })();

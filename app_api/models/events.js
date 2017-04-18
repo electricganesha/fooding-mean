@@ -42,7 +42,8 @@ var eventsSchema = new mongoose.Schema({
     photos: [String],
     wall: [postSchema],
     reviews: [reviewSchema],
-    stars : { type: Number, min: 1, max: 5 }
+    stars : { type: Number, min: 1, max: 5 },
+    notes: String
 });
 
 mongoose.model('Events', eventsSchema);

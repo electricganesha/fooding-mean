@@ -38,6 +38,7 @@ var files = [
   'app_client/eventpopup/eventpopup.controller.js',
   'app_client/myevents/myevents.controller.js',
   'app_client/profile/profile.controller.js',
+  'app_client/user/user.controller.js',
   'app_client/auth/signin/signin.controller.js',
   'app_client/auth/register/register.controller.js'
 ];

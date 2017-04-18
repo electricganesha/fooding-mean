@@ -95,6 +95,27 @@ body{
   color: #f7efdf;
 }
 
+@-webkit-keyframes moveUp {
+  0% {
+    top: 75px;
+    opacity: 0;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+@keyframes moveUp {
+  0% {
+    top: 75px;
+    opacity: 0;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
 #preContentEvent:after {
   content: " ";
   z-index: 1;
@@ -117,13 +138,13 @@ body{
 #preContentTopDiv{
   position: relative;
   z-index: 2;
-  height: 33%;
+  height: 31%;
 }
 
 #profilePicEvent{
   display: inline-block;
-  width: 85px;
-  height: 85px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -138,9 +159,10 @@ body{
 
 #ownerInfo{
   color: white;
-  font-size: 16px;
+  font-size: 12px;
   text-align: right;
-  padding-top: 15px;
+  padding-top: 23px;
+  padding-right: 0;
 }
 
 #dateEventInfo{
@@ -149,29 +171,29 @@ body{
   padding-top: 15px;
 }
 #dateEvent{
-  font-size: 20px;
+  font-size: 17px;
 }
 
 #preContentCenterDiv{
   position: relative;
   z-index: 2;
-  height: 33%;
+  height: 48%;
 }
 
 #preContentBottomDiv{
   position: relative;
   z-index: 2;
-  height: 33%;
+  height: 20%;
 }
 
 #titleEvent{
   color:#f7c04b;
-  font-size: 22px;
+  font-size: 19px;
 }
 
 #descriptionEvent{
   color: white;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .glyphicon-star{
@@ -183,15 +205,17 @@ body{
 }
 
 #dateOptions{
-  font-size:14px;
+  font-size:13px;
 }
 
 #attendeesNumber{
-  font-size: 16px;
+  font-size: 13px;
 }
 
 
 /*Events Popup Page Styles */
+
+
 .modal-content{
   border-radius: 0;
 }
@@ -254,9 +278,9 @@ body{
 
 #ownerInfoPopup{
   color: white;
-  font-size: 12px;
+  font-size: 13px;
   text-align: right;
-  padding-top: 20px;
+  padding-top: 24px;
   padding-right: 0;
 }
 
@@ -309,4 +333,15 @@ body{
   background-position: center center;
   background-size: cover;
 }
+
+#popupUserLink:hover #attendeeName{
+  text-decoration: underline;
+}
+
+#myLink:hover #myName{
+  text-decoration: underline;
+}
+
+/*New Event Page Styles */
+
 

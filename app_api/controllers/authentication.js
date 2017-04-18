@@ -84,7 +84,7 @@ module.exports.loginSocial = function(req, res) {
               }
               else {
                 token = newUser.generateJwt();
-                sendJSONresponse(res,200, { "token" : token, "userId" : user._id });
+                sendJSONresponse(res,200, { "token" : token, "userId" : newUser._id });
               }
           });
       }
