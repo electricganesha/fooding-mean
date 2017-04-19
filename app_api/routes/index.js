@@ -10,6 +10,7 @@ var auth = jwt({
 var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 var ctrlEvents = require('../controllers/events');
+var ctrlCategories = require('../controllers/categories');
 
 // User
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -28,8 +29,10 @@ router.get('/events/:userId', auth, ctrlEvents.eventByUserId); //get all events 
 router.get('/event/:eventId', auth, ctrlEvents.eventReadOne); //get project by id and owner information
 
 // Categories
-router.get('/categories', auth, ctrlEvents.eventList); //get all events
-router.post('/categories', ctrlEvents.eventCreate); //create a new event
+router.get('/categories/appetizers', auth, ctrlCategories.appetizers); //Get categories by subcategory appetizers
+router.get('/categories/dishes', auth, ctrlCategories.dishes); //Get categories by subcategory dishes
+router.get('/categories/desserts', auth, ctrlCategories.desserts); //Get categories by subcategory desserts
+router.get('/categories/drinks', auth, ctrlCategories.drinks); //Get categories by subcategory drinks
 
 // Logout
 router.get('/logout', function(req, res) {

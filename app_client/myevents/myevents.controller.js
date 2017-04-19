@@ -4,8 +4,8 @@
     .module('fooding')
     .controller('myEventsCtrl', myEventsCtrl);
 
-    myEventsCtrl.$inject = ['$scope', '$uibModal', 'authentication', 'foodingData'];
-    function myEventsCtrl ($scope, $uibModal, authentication, foodingData) {
+    myEventsCtrl.$inject = ['$scope', 'authentication', 'foodingData'];
+    function myEventsCtrl ($scope, authentication, foodingData) {
       console.log('My events controller is running');
       
       foodingData.getAllEventsFromUser(authentication.getUserId())

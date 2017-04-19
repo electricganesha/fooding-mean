@@ -14,8 +14,8 @@
             }
           }
         })
-        .state('events', {
-          url: '/events',
+        .state('foodings', {
+          url: '/foodings',
           views: {
             nav: {
               templateUrl: '/common/directives/navigation/navigation.template.html',
@@ -27,15 +27,15 @@
             }
           } 
         })
-        .state('newevent', {
-          url: '/newevent',
+        .state('newfooding', {
+          url: '/newfooding',
           views: {
             nav: {
               templateUrl: '/common/directives/navigation/navigation.template.html',
               controller: 'navigationCtrl'
             },
             content: {
-              templateUrl:'/events/newevent.view.html',
+              templateUrl:'/newevent/newevent.view.html',
               controller: 'newEventCtrl'
             }
           } 

@@ -9,7 +9,7 @@
       console.log('Home controller is running');
       $scope.home=true;
       if(authentication.getToken() != undefined) {
-        $location.path('events');
+        $location.path('foodings');
       }
 
       $scope.loginPopup = function () {
