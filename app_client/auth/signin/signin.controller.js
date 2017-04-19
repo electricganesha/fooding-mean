@@ -25,10 +25,11 @@
       } else {
         authentication
           .login($scope.credentials)
-          .error(function(err){
+          .catch(function(err){
             alert(err.message);
           })
           .then(function(){
+            $uibModalInstance.close();
             $location.path('events');
           });
       }
@@ -37,10 +38,11 @@
     $scope.$on('event:social-sign-in-success', function(event, userDetails){
       authentication
           .loginSocial(userDetails)
-          .error(function(err){
+          .catch(function(err){
             alert(err.message);
           })
           .then(function(){
+            $uibModalInstance.close();
             $location.path('events');
           });
     });

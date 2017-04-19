@@ -31,11 +31,15 @@ var files = [
   'app_client/common/directives/navigation/navigation.directive.js',
   'app_client/common/directives/navigation/navigation.controller.js',
   'app_client/common/services/authentication.service.js',
+  'app_client/common/services/categories.data.service.js',
   'app_client/common/services/data.service.js',
   'app_client/home/home.controller.js',
   'app_client/events/events.controller.js',
-  'app_client/events/newevent.controller.js',
+  'app_client/newevent/newevent.controller.js',
+  'app_client/eventpopup/eventpopup.controller.js',
+  'app_client/myevents/myevents.controller.js',
   'app_client/profile/profile.controller.js',
+  'app_client/user/user.controller.js',
   'app_client/auth/signin/signin.controller.js',
   'app_client/auth/register/register.controller.js'
 ];

@@ -1,0 +1,114 @@
+<div class="modal-content" style="border:0; background: #f7efdf;">
+    <form ng-submit="onSubmit()">
+        <div class="modal-body" style="padding-top:0; padding-bottom:0;">
+           <div class="row">
+                <div class="col-md-3" style=" text-align:center;">
+                    <br>
+                    <img width="85px" src="icons/chef_hat.png"></img>
+                    <p><b>MENU</b><p>
+                    <br>
+                    <div ng-if="event.menu[0].entree !=''">
+                        <p>{{event.menu[0].entree}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].first !=''">
+                        <br>
+                        <p>{{event.menu[0].first}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].second !=''">
+                        <br>
+                        <p>{{event.menu[0].second}}<p>
+                    </div>
+                    <div ng-if="event.menu[0].dessert !=''">
+                        <br>
+                        <p>{{event.menu[0].dessert}}<p>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                        <p><b>Notes and warnings</b><p>
+                        <div ng-if="event.notes != undefined">
+                            <p>{{event.notes}}</p>
+                        </div>
+                        <div ng-if="event.notes == undefined">
+                            <p>No notes available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9" style="padding:0;">
+                    <div id="popupTopDivEvent">
+                        <div class="row">
+                            <div class="col-sm-8 col-lg-8" id="datePopupEventInfo">
+                                <p id="dateEventPopup">{{event.startDate | date : 'dd/MM/yyyy'}}</p>
+                                <p id="dateOptionsPopup" style="margin:0;">{{event.startDate | date : 'EEEE'}}</p>
+                                <p id="dateOptionsPopup">{{event.startDate | date : 'HH:mm'}}/{{event.endDate | date : 'HH:mm'}}</p>
+                            </div>
+                            <div class="col-sm-4 col-lg-4" style="position: relative; z-index: 2; padding-top: 15px;">
+                                <a id="popupUserLink" href="/user/{{event.owner._id}}" ng-click="closePopup()" style="text-decoration:none;">
+                                    <div class="col-sm-6 col-lg-6" id="ownerInfoPopup" >
+                                        <p id="attendeeName" style="margin:0;">{{event.owner.name}}</p>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<5 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<4 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<3 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<2 ? '' : ' full'}}"></span>
+                                        <span class="glyphicon glyphicon-star{{ event.owner.stars<1 ? '' : ' full'}}"></span>
+                                        <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{event.owner.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{event.owner.upVotes}}</p>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6" id="ownerPicPopup">
+                                        <div id="profilePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="popupDivEvent">
+                        <div class="row" style="margin:0; height: 100%;">
+                            <div class="col-sm-12 col-lg-12" style="position: relative; z-index: 2; padding: 0; padding-bottom: 1px;" >
+                                <div id="popupEventDivLeft"  style="background: #182528;">
+                                    <p id="titleEventPopup">{{event.title}}</p>
+                                    <p id="descriptionEventPop">{{event.description}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-12" style="position: relative; z-index: 2; padding: 0; padding-top: 1px;">
+                                <div id="popupEventDivRight"  style="background: #182528;">
+                                    <div style="font-size: 12px;">
+                                        <div class="row" style="margin: 0;">
+                                            <div class="col-sm-6 col-lg-6" style="padding-right:35px;">
+                                                <p><span class="glyphicon glyphicon-user" style="color: white;"></span> {{event.attendees.length}}/{{event.attendeeLimit}}</p>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-6" style="text-align:right; color:#f7c04b;">
+                                                <p>Guests</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-12" style="padding: 0; margin-top:20px;">
+                                                <div ng-if="event.length != 0">
+                                                    <a class="col-sm-2 col-lg-2" id="popupUserLink" href="/user/{{attendee._id}}" ng-click="closePopup()" style="color: #f7efdf; text-decoration:none;" ng-repeat="attendee in event.attendees track by $index">
+                                                        <div id="attendeeInfo" style="cursor:pointer;">
+                                                            <div id="attendeePicPopupEvent" ng-if="event.owner.profilePic" ng-style="{'background-image':'url({{event.owner.profilePic}})'}"></div>
+                                                            <p id="attendeeName" style="margin:0;">{{attendee.name}}</p>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<5 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<4 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<3 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<2 ? '' : ' full'}}"></span>
+                                                            <span class="glyphicon glyphicon-star{{ attendee.stars<1 ? '' : ' full'}}"></span>
+                                                            <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{attendee.downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{attendee.upVotes}}</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div ng-if="event.notes == undefined" style="text-align:center;">
+                                                    <p>No guests yet</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </form>
+</div>

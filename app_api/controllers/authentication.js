@@ -24,7 +24,7 @@ module.exports.register = function(req, res) {
     }
     else {
       token = user.generateJwt();
-      sendJSONresponse(res,200, { "token" : token });
+      sendJSONresponse(res,200, { "token" : token, "userId" : user._id });
     }
   });
 
@@ -42,7 +42,7 @@ module.exports.login = function(req, res) {
         // If a user is found
         if(user){
           token = user.generateJwt();
-          sendJSONresponse(res,200, { "token" : token });
+          sendJSONresponse(res,200, { "token" : token, "userId" : user._id });
         } else {
           // If user is not found
           res.status(401).json(info);
@@ -67,7 +67,7 @@ module.exports.loginSocial = function(req, res) {
           });
         }
         token = user.generateJwt();
-        sendJSONresponse(res,200, { "token" : token });
+        sendJSONresponse(res,200, { "token" : token, "userId" : user._id });
       } else {
           var newUser = new User();
           newUser.email = req.body.email;
@@ -84,7 +84,7 @@ module.exports.loginSocial = function(req, res) {
               }
               else {
                 token = newUser.generateJwt();
-                sendJSONresponse(res,200, { "token" : token });
+                sendJSONresponse(res,200, { "token" : token, "userId" : newUser._id });
               }
           });
       }

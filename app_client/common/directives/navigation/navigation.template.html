@@ -1,12 +1,37 @@
 <div class="col-sm-3 col-lg-2" id = "navbar">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12" style="padding-top:30px; text-align:center;">
+      <h1>Fooding</h1>
+    </div>
+    <div class="col-sm-12 col-lg-12" style="padding-top:30px; height:85px;">
+      <div class="row">
+        <div class="col-sm-4 col-lg-4">
+        </div>
+        <a id="myLink" href="/user/{{userId}}" style="color: #f7efdf; text-decoration:none;" >
+          <div class="col-sm-4 col-lg-4" id="infoUser" >
+            <p id="myName" style="margin:0;">{{name}}</p>
+            <span class="glyphicon glyphicon-star{{ stars<5 ? '' : ' full'}}"></span>
+            <span class="glyphicon glyphicon-star{{ stars<4 ? '' : ' full'}}"></span>
+            <span class="glyphicon glyphicon-star{{ stars<3 ? '' : ' full'}}"></span>
+            <span class="glyphicon glyphicon-star{{ stars<2 ? '' : ' full'}}"></span>
+            <span class="glyphicon glyphicon-star{{ stars<1 ? '' : ' full'}}"></span>
+            <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{upVotes}}</p>
+          </div>
+          <div class="col-sm-4 col-lg-4">
+            <div id="profilePic" ng-if="profilePic" ng-style="{'background-image':'url({{profilePic}})'}">
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
   <nav class="navbar navbar-fixed-side">
-    <!-- normal collapsible navbar markup -->
     <ul>
-      <li class="active"><a href="#">Events</a></li>
-      <li><a ng-click="newEventPopup()">New Event</a></li>
-      <li><a href="#">Menu Item 3</a></li>
-      <li><a href="#">Menu Item 4</a></li>
-      <li><a href="#">Reviews <span class="badge">1,118</span></a>
+      <a ui-sref="foodings"><li>FOODINGS</li></a>
+      <a ui-sref="newfooding"><li>CREATE FOODING</li></a>
+      <a href="#"><li>FOLLOWING</li></a>
+      <a ui-sref="myfoodings"><li>MY FOODINGS</li></a>
+      <a ui-sref="profile"><li>SETTINGS</li></a>
     </ul>
   </nav>
 </div>

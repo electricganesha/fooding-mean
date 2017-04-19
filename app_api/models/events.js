@@ -24,10 +24,11 @@ var postSchema = new mongoose.Schema({
 
 var eventsSchema = new mongoose.Schema({
     dateCreated: { type: Date, default: Date.now },
-    dateOfEvent:  Date,
+    startDate:  { type: Date, required: true },
+    endDate:  { type: Date, required: true },
     owner: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Categories',
+        ref: 'User',
         required: true,
     },
     title: String,
@@ -41,7 +42,8 @@ var eventsSchema = new mongoose.Schema({
     photos: [String],
     wall: [postSchema],
     reviews: [reviewSchema],
-    stars : { type: Number, min: 1, max: 5 }
+    stars : { type: Number, min: 1, max: 5 },
+    notes: String
 });
 
 mongoose.model('Events', eventsSchema);

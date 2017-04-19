@@ -17,10 +17,24 @@
       authentication.logout();
     }
 
-    var getProfile = function () {
+    var getMyProfile = function () {
       if(authentication.isLoggedIn())
       {
       return $http.get('/api/profile', {
+        headers: {
+          Authorization: 'Bearer '+ authentication.getToken()
+        }
+      });
+      }
+      else {
+        return false;
+      }
+    };
+
+    var getUserProfile = function (userId) {
+      if(authentication.isLoggedIn())
+      {
+      return $http.get('/api/profile/' + userId, {
         headers: {
           Authorization: 'Bearer '+ authentication.getToken()
         }
@@ -60,12 +74,41 @@
       }
     };
 
+    var getAllEventsFromUser = function(id)
+    {
+      if(authentication.isLoggedIn()) {
+        return $http.get('/api/events/' + id, {
+          headers: {
+            Authorization: 'Bearer '+ authentication.getToken()
+          }
+        });
+      } else {
+        return false;
+      }
+    };
+
+    var getEventById = function(id)
+    {
+      if(authentication.isLoggedIn()) {
+        return $http.get('/api/event/' + id, {
+          headers: {
+            Authorization: 'Bearer '+ authentication.getToken()
+          }
+        });
+      } else {
+        return false;
+      }
+    };
+
     return {
       setExternalToken : setExternalToken,
       removeToken : removeToken,
-      getProfile : getProfile,
+      getMyProfile : getMyProfile,
+      getUserProfile : getUserProfile,
       setProfile : setProfile,
-      getAllEvents : getAllEvents
+      getAllEvents : getAllEvents,
+      getAllEventsFromUser : getAllEventsFromUser,
+      getEventById : getEventById
     };
   }
 
