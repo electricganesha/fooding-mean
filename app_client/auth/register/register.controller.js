@@ -32,7 +32,7 @@
               })
               .then(function(){
                 $uibModalInstance.close();
-                $location.path('events');
+                $location.path('foodings');
               });
           }
       };
@@ -45,7 +45,7 @@
             })
             .then(function(){
               $uibModalInstance.close();
-              $location.path('events');
+              $location.path('foodings');
             });
       });
 

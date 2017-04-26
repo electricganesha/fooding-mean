@@ -344,4 +344,81 @@ body{
 
 /*New Event Page Styles */
 
+#categoryContainer{
+  padding-left: 15px;
+}
 
+#category{
+  background: transparent;
+  -webkit-transition: background 0.1s linear;
+  -moz-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+#category:hover{
+  background: #f7c04b; 
+}
+
+
+input[type="checkbox"]:checked + label {
+    background: #f7c04b;
+}
+
+#dishTextBox{
+  width: 100%;
+  background: #f7efdf;
+  border: solid 1px #182528;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#dishTextBox:focus {outline: none; }
+
+.slide {
+    -webkit-animation: slide 0.5s forwards;
+    -moz-animation: slide 0.5s forwards;
+    animation: slide 0.5s forwards;
+}
+
+@-webkit-keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+      margin-left:0;
+    }
+}
+
+@keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+      margin-left:0;
+    }
+}
+
+#newEventContainer{
+  padding:0; 
+  margin-left: 16.69%;
+  min-height: 100vh; 
+  background: #f7efdf; 
+  position: absolute;
+}
+
+#divIcons{
+  padding-left:50px; 
+  padding-top:50px; 
+  padding-right: 50px;
+}
+
+#newEventDescription{
+  border: solid 2px #f7c04b; 
+  margin-top: 50px; 
+  border-radius: 8px; 
+  margin-left: 40px; 
+  margin-right: 40px;
+}

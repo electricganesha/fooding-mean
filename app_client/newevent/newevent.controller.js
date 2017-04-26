@@ -8,9 +8,31 @@
     function newEventCtrl ($scope, categoriesData) {
       console.log('New Event controller is running');
 
-          /*var setHeight = document.getElementById("appetizersIcons").height;
-          console.log(setHeight);
-          document.getElementById("appetizersText").style.height = setHeight;*/
+      $scope.selected = [];
+
+      $scope.slideIn = "slideOut";
+
+      $scope.toggle = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+
+      $scope.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+      };
+
+      $scope.slide = function () {
+        if($scope.slideIn == "slide") {
+          $scope.slideIn = "slideOut";
+        }else{
+          $scope.slideIn= "slide";
+        }
+      };
 
       categoriesData.getAppetizers()
         .then(function (data){
