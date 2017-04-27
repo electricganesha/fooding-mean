@@ -2,8 +2,8 @@
   <div id="page-content-wrapper">
       <div class="container-fluid">
           <div class="row">
-                <div class="col-md-4" id="newEventDescription">
-                    <div class="row">
+                <div class="col-md-5">
+                    <div class="row" id="newEventDescription">
                         <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
                             <p style="margin-top: 8px;">My fooding description</p>
                         </div>
@@ -11,16 +11,16 @@
                         <br>
                         <br>
                         <br>
-                        <div class="col-md-12">
-                            <p>Choose the icons that represent your meal</p>
+                        <div class="col-md-12" style="padding-left: 22px;">
+                            <p>Describe your fooding event briefly/mood/objective/type of event</p>
                         </div>
-                        <div class="col-md-12" style="text-align: center; padding-bottom:30px;">
-                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 15vw;" ></textarea>
+                        <div class="col-md-12" style="text-align: center; padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
+                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 13vw; border: solid 1px #182528;" ></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7" style="border: solid 2px #f7c04b; margin-top: 50px; border-radius: 8px;">
-                    <div class="row">
+                <div class="col-md-7">
+                    <div class="row" id="newEventPhoto">
                         <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
                             <p style="margin-top: 8px;">Upload cover photo</p>
                         </div>
@@ -28,34 +28,75 @@
                         <br>
                         <br>
                         <br>
-                        <p style="text-align:center;" ng-hide="selected.length != 0">Nothing selected</p>
-                        <br>
-                        <div class="col-md-12" ng-repeat="appetizer in appetizers track by $index" ng-show="exists(appetizer._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{appetizer.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
+                        <div class="col-md-12" style="padding-left: 22px;">
+                            <p>Choose a cover for your event this will the background for your fooding square and event page</p>
                         </div>
-                        <div style="text-align: center;" ng-show="selected.length != 0">
-                            <img style="cursor: pointer;" ng-click="slide()" width="60" ng-src="/img/button_forwards.png">
-                            <br>
-                            <br>
-                            <br>
+                        <div class="col-md-12" style="padding-bottom: 12px; padding-right: 22px; padding-left: 22px;">
+                            <div ngf-drop ngf-select ng-model="files" class="drop-box" id="drop-box"
+                            ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                            accept="image/*" ngf-pattern="'image/*'">
+                                <p id="infoDrop">Drag and drop or click to select a photo</p>
+                                <canvas id="preCoverFooding" ngf-background="files[0]">
+                                </canvas>
+                            </div>
+                            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5" style="border: solid 2px #f7c04b; margin-top: 50px; border-radius: 8px;">
-                    <div class="row">
+                <div class="col-md-6">
+                    <div class="row" id="newEventDetails">
                         <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">Upload cover photo</p>
+                            <p style="margin-top: 8px;">Event Details</p>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                            <p>Chose the title for your foonding event</p>
+                            <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p>Number of attendees</p>
+                                    <input id="eventTitleTextBox" type="number" min="1" max="100" style="height: 33px;" value="1">
+                                </div>
+                                <div class="col-md-3">
+                                    <p>Date</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                </div>
+                                <div class="col-md-3">
+                                    <p>Start Time</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="time">
+                                </div>
+                                <div class="col-md-3">
+                                    <p>End time</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="time">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
+                            <p>Notes for your fooders / Bring wine? Bring dessert? Extra chair? Name it here</p>
+                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;" >
+                            </textarea>
+                        </div>
+                        <br>
+                    </div>
+                </div>  
+                
+                <div class="col-md-6">
+                    <div class="row" id="newEventAdress">
+                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                            <p style="margin-top: 8px;">Event Location</p>
                         </div>
                         <br>
                         <br>
@@ -63,28 +104,8 @@
                         <br>
                         <p style="text-align:center;" ng-hide="selected.length != 0">Nothing selected</p>
                         <br>
-                        <div class="col-md-12" ng-repeat="appetizer in appetizers track by $index" ng-show="exists(appetizer._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{appetizer.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                        <div style="text-align: center;" ng-show="selected.length != 0">
-                            <img style="cursor: pointer;" ng-click="slide()" width="60" ng-src="/img/button_forwards.png">
-                            <br>
-                            <br>
-                            <br>
-                        </div>
                     </div>
-                </div>         
+                </div>        
           </div>
       </div>
   </div>   
@@ -175,7 +196,7 @@
                 <div class="col-md-4" style="border: solid 2px #f7c04b; margin-top: 80px; border-radius: 8px;">
                     <div class="row">
                         <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">MENU</p>
+                            <p style="margin-top: 8px; letter-spacing:1px;"><b>MENU</b></p>
                         </div>
                         <br>
                         <br>
