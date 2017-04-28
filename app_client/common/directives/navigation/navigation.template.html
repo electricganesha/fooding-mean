@@ -18,6 +18,9 @@
             <p><span class="glyphicon glyphicon-user" style="color: #cf7b7b;"></span> {{downVotes}} &nbsp;&nbsp; <span class="glyphicon glyphicon-user" style="color: #92d284;"></span> {{upVotes}}</p>
           </div>
         </a>
+        <div class="col-sm-4 col-lg-4">
+            <div id="profilePic" ng-if="profilePic" ng-style="{'background-image':'url({{profilePic}})'}"></div>
+        </div>
       </div>
     </div>
   </div>

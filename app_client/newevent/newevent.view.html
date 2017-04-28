@@ -68,7 +68,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <p>Date</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                    <!--<input id="eventTitleTextBox" style="height: 33px;" type="text">-->
+                                    <input type="text" id="eventTitleTextBox" popup-placement="bottom" style="height: 33px;" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" ng-focus="open1()" alt-input-formats="altInputFormats" />
+                                    
                                 </div>
                                 <div class="col-md-3">
                                     <p>Start Time</p>
@@ -86,8 +88,7 @@
                         <br>
                         <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
                             <p>Notes for your fooders / Bring wine? Bring dessert? Extra chair? Name it here</p>
-                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;" >
-                            </textarea>
+                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;"></textarea>
                         </div>
                         <br>
                     </div>
@@ -102,8 +103,42 @@
                         <br>
                         <br>
                         <br>
-                        <p style="text-align:center;" ng-hide="selected.length != 0">Nothing selected</p>
+                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>Street</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                    <p>city</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                </div>
+                            </div>
+                        </div>
                         <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>Zip code</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Country</p>
+                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
+                            <p>References for those attending / Ex: Near a supermarket</p>
+                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;"></textarea>
+                        </div>
                     </div>
                 </div>        
           </div>
@@ -260,14 +295,11 @@
                             <br>
                             <br>
                         </div>
-                        <div style="text-align: center;" ng-show="selected.length != 0">
-                            <img style="cursor: pointer;" ng-click="slide()" width="60" ng-src="/img/button_forwards.png">
-                            <br>
-                            <br>
-                            <br>
-                        </div>
                     </div>
-                </div>         
+                </div> 
+                <div class="col-md-12" style="text-align: center; margin-top:70px;" ng-show="selected.length != 0">
+                    <button id="btNext" class="btn btn-default" ng-click="slide()">Next</button>
+                </div>        
           </div>
       </div>
   </div>   
