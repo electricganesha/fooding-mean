@@ -8,14 +8,21 @@
     function newEventCtrl ($scope, categoriesData, Upload) {
       console.log('New Event controller is running');
 
+      var eventJson = [];
+
       $scope.onTimeSet = function (newDate, oldDate) {
           console.log(newDate);
           console.log(oldDate);
       }
 
-      $scope.selected = [];
+      $scope.selectedAppetizers = [];
+      $scope.selectedDishes = [];
+      $scope.selectedDesserts = [];
+      $scope.selectedDrinks = [];
 
-      $scope.slideIn = "slideOut";
+      $scope.first = true;
+      $scope.second = false;
+      $scope.third = false;
 
       $scope.toggle = function (item, list) {
         var idx = list.indexOf(item);
@@ -31,12 +38,24 @@
         return list.indexOf(item) > -1;
       };
 
-      $scope.slide = function () {
-        if($scope.slideIn == "slide") {
-          $scope.slideIn = "slideOut";
-        }else{
-          $scope.slideIn= "slide";
-        }
+      $scope.firstNext = function () {
+        $scope.first = false;
+        $scope.second = true;
+      };
+
+      $scope.secondNext = function () {
+        $scope.second = false;
+        $scope.third = true;
+      };
+
+      $scope.secondBack = function () {
+        $scope.first = true;
+        $scope.second = false;
+      };
+
+      $scope.thirdBack = function () {
+        $scope.second = true;
+        $scope.third = false;
       };
 
       categoriesData.getAppetizers()
@@ -82,14 +101,15 @@
               for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 if (!file.$error) {
+                  console.log(file);
                   Upload.upload({
-                      url: '/img/foonding_covers/',
+                      url: '/api/eventcover',
+                      method: 'POST',
                       data: {
                         file: file  
                       }
                   }).then(function (resp) {
-                      console.log(files);
-                      console.log(document.getElementById("drop-box"));
+                      console.log(resp);
                       document.getElementById("drop-box").style.backgroundImage = "url('" + file + "')";
                   }, null, function (evt) {
                       var progressPercentage = parseInt(100.0 *
@@ -102,9 +122,6 @@
               }
           }
       };
-
-
-
 
       $scope.today = function() {
         $scope.dt = new Date();
@@ -192,6 +209,38 @@
 
         return '';
       }
+      
+      $scope.submit = function() {
+        eventJson.menu = [];
+        if($scope.selectedAppetizers.length != 0){
+          eventJson.menu.appetizers = [];
+          for (i=0; i<$scope.selectedAppetizers.length; i++){
+            eventJson.menu.appetizers[i] = document.getElementsByName($scope.selectedAppetizers[i])[0].value;
+          }
+        }
+        if($scope.selectedDishes.length != 0){
+          eventJson.menu.dishes = [];
+          for (i=0; i<$scope.selectedDishes.length; i++){
+            eventJson.menu.dishes[i] = document.getElementsByName($scope.selectedDishes[i])[0].value;
+          }
+        }
+        if($scope.selectedDesserts.length != 0){
+          eventJson.menu.desserts = [];
+          for (i=0; i<$scope.selectedDesserts.length; i++){
+            eventJson.menu.desserts[i] = document.getElementsByName($scope.selectedDesserts[i])[0].value;
+          }
+        }
+        if($scope.selectedDrinks.length != 0){
+          eventJson.menu.drinks = [];
+          for (i=0; i<$scope.selectedDrinks.length; i++){
+            eventJson.menu.drinks[i] = document.getElementsByName($scope.selectedDrinks[i])[0].value;
+          }
+        }
+        eventJson.title = document.getElementsByName("eventTitle")[0].value;
+        eventJson.description = document.getElementsByName("eventDescription")[0].value;
+        console.log(document.getElementsByName("eventDescription")[0].value);
+        console.log(eventJson);
+      };
 
 
     }

@@ -1,306 +1,328 @@
-<div class="col-sm-10 col-lg-10" id="newEventContainer">
-  <div id="page-content-wrapper">
-      <div class="container-fluid">
-          <div class="row">
-                <div class="col-md-5">
-                    <div class="row" id="newEventDescription">
-                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">My fooding description</p>
+<form ng-submit="submit()" ng-controller="newEventCtrl">
+    <div class="col-sm-10 col-lg-10" ng-show="third" id="newEventContainer">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row" id="newEventDetails">
+                            <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                                <p style="margin-top: 8px;">Event Details</p>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p>Number of attendees</p>
+                                        <input id="eventTitleTextBox" type="number" min="1" max="100" style="height: 33px;" value="1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Date</p>
+                                        <!--<input id="eventTitleTextBox" style="height: 33px;" type="text">-->
+                                        <input type="text" id="eventTitleTextBox" popup-placement="bottom" style="height: 33px;" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" ng-focus="open1()" alt-input-formats="altInputFormats" />
+                                        
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Start Time</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="time">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>End time</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="time">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
+                                <p>Notes for your fooders / Bring wine? Bring dessert? Extra chair? Name it here</p>
+                                <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 13vw; border: solid 1px #182528;"></textarea>
+                            </div>
+                            <br>
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px;">
-                            <p>Describe your fooding event briefly/mood/objective/type of event</p>
+                    </div>  
+                    <div class="col-md-6">
+                        <div class="row" id="newEventAdress">
+                            <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                                <p style="margin-top: 8px;">Event Location</p>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Street</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>city</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Zip code</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Country</p>
+                                        <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-bottom:17px; padding-left: 22px; padding-right: 22px;">
+                                <p>References for those attending / Ex: Near a supermarket</p>
+                                <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 9vw; border: solid 1px #182528;"></textarea>
+                            </div>
                         </div>
-                        <div class="col-md-12" style="text-align: center; padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
-                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 13vw; border: solid 1px #182528;" ></textarea>
-                        </div>
-                    </div>
+                    </div>     
+                    <div class="col-md-12" style="text-align: center; margin-top:70px;" ng-show="selected.length != 0">
+                        <br>
+                        <br>
+                        <br>
+                        <button id="btNext" class="btn btn-default" ng-click="thirdBack()">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="btNext" class="btn btn-default" ng-click="secondNext()">Next</button>
+                    </div>    
                 </div>
-                <div class="col-md-7">
-                    <div class="row" id="newEventPhoto">
-                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">Upload cover photo</p>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px;">
-                            <p>Choose a cover for your event this will the background for your fooding square and event page</p>
-                        </div>
-                        <div class="col-md-12" style="padding-bottom: 12px; padding-right: 22px; padding-left: 22px;">
-                            <div ngf-drop ngf-select ng-model="files" class="drop-box" id="drop-box"
-                            ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-                            accept="image/*" ngf-pattern="'image/*'">
-                                <p id="infoDrop">Drag and drop or click to select a photo</p>
-                                <canvas id="preCoverFooding" ngf-background="files[0]">
-                                </canvas>
+            </div>
+        </div>   
+    </div>
+    <div class="col-sm-10 col-lg-10" ng-show="second" id="newEventContainer">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row" id="newEventDescription">
+                            <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                                <p style="margin-top: 8px;">My fooding description</p>
                             </div>
-                            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
+                                <p>Chose the title for your foonding event</p>
+                                <input id="eventTitleTextBox" name="eventTitle" style="height: 33px;" type="text" required>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px;">
+                                <p>Describe your fooding event briefly/mood/objective/type of event</p>
+                            </div>
+                            <div class="col-md-12" style="text-align: center; padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
+                                <textarea name="eventDescription" style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 13vw; border: solid 1px #182528;"></textarea>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="row" id="newEventPhoto">
+                            <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                                <p style="margin-top: 8px;">Upload cover photo</p>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="col-md-12" style="padding-left: 22px;">
+                                <p>Choose a cover for your event this will the background for your fooding square and event page</p>
+                            </div>
+                            <div class="col-md-12" style="padding-bottom: 15px; padding-right: 22px; padding-left: 22px;">
+                                <div ngf-drop ngf-select ng-model="files" class="drop-box" id="drop-box"
+                                ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+                                accept="image/*" ngf-pattern="'image/*'">
+                                    <p id="infoDrop">Drag and drop or click to select a photo</p>
+                                    <canvas id="preCoverFooding" ngf-background="files[0]">
+                                    </canvas>
+                                </div>
+                                <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align: center; margin-top:70px;" ng-show="selected.length != 0">
+                        <br>
+                        <br>
+                        <br>
+                        <button id="btNext" class="btn btn-default" ng-click="secondBack()">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="btNext" class="btn btn-default" ng-click="secondNext()">Next</button>
+                        <input type="submit" id="submit" value="test">
+                    </div>       
                 </div>
-                <div class="col-md-6">
-                    <div class="row" id="newEventDetails">
-                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">Event Details</p>
-                        </div>
+            </div>
+        </div>   
+    </div>
+    <div class="col-sm-10 col-lg-10" ng-show="first" id="newEventContainer">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-7" id="divIcons">
+                        <p>Choose the icons that represent your meal</p>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
-                            <p>Chose the title for your foonding event</p>
-                            <input id="eventTitleTextBox" style="height: 33px;" type="text">
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <p>Number of attendees</p>
-                                    <input id="eventTitleTextBox" type="number" min="1" max="100" style="height: 33px;" value="1">
+                        <div id="categoryContainer">
+                            <div class="row" style="background: #f7c04b;">
+                                <div id="appetizersText" class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
+                                    <p style="top: 50%;">APPETIZERS</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <p>Date</p>
-                                    <!--<input id="eventTitleTextBox" style="height: 33px;" type="text">-->
-                                    <input type="text" id="eventTitleTextBox" popup-placement="bottom" style="height: 33px;" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" ng-focus="open1()" alt-input-formats="altInputFormats" />
-                                    
-                                </div>
-                                <div class="col-md-3">
-                                    <p>Start Time</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="time">
-                                </div>
-                                <div class="col-md-3">
-                                    <p>End time</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="time">
+                                <div id="appetizersIcons" class="col-md-10 col-sm-10">
+                                    <div class="row" style="background: #f7efdf; padding-left: 35px;">
+                                        <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="appetizer in appetizers track by $index ">
+                                            <input class="catselect" id="{{appetizer._id}}" ng-checked="exists(appetizer._id, selectedAppetizers)" ng-click="toggle(appetizer._id, selectedAppetizers)" style="display:none;"  type="checkbox">
+                                            <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{appetizer._id}}">
+                                                <img width="80" ng-src="/icons/{{appetizer.icon}}">
+                                                <p>{{appetizer.title}}</p>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
-                            <p>Notes for your fooders / Bring wine? Bring dessert? Extra chair? Name it here</p>
-                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;"></textarea>
-                        </div>
-                        <br>
-                    </div>
-                </div>  
-                
-                <div class="col-md-6">
-                    <div class="row" id="newEventAdress">
-                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px;">Event Location</p>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>Street</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                        <div id="categoryContainer">
+                            <div class="row" style="background: #f7c04b;">
+                                <div class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
+                                    <p>DISHES</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <p>city</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="row" style="background: #f7efdf; padding-left: 35px;">
+                                    <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="dish in dishes track by $index ">
+                                            <input class="catselect" id="{{dish._id}}" ng-checked="exists(dish._id, selectedDishes)" ng-click="toggle(dish._id, selectedDishes)" style="display:none;"  type="checkbox">
+                                            <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{dish._id}}">
+                                                <img width="80" ng-src="/icons/{{dish.icon}}">
+                                                <p>{{dish.title}}</p>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-left: 22px; padding-right: 22px;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>Zip code</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                        <div id="categoryContainer">
+                            <div class="row" style="background: #f7c04b;">
+                                <div class="col-md-2 col-sm-2" style=" text-align:center; margin-top: 25px;">
+                                    <p>DESSERTS</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <p>Country</p>
-                                    <input id="eventTitleTextBox" style="height: 33px;" type="text">
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="row" style="background: #f7efdf; padding-left: 35px;">
+                                        <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="dessert in desserts track by $index ">
+                                            <input class="catselect" id="{{dessert._id}}" ng-checked="exists(dessert._id, selectedDesserts)" ng-click="toggle(dessert._id, selectedDesserts)" style="display:none;"  type="checkbox">
+                                            <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{dessert._id}}">
+                                                <img width="80" ng-src="/icons/{{dessert.icon}}">
+                                                <p>{{dessert.title}}</p>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-12" style="padding-bottom:20px; padding-left: 22px; padding-right: 22px;">
-                            <p>References for those attending / Ex: Near a supermarket</p>
-                            <textarea style="width: 100%; resize: none; outline:none; background: #f7efdf; height: 10vw; border: solid 1px #182528;"></textarea>
-                        </div>
-                    </div>
-                </div>        
-          </div>
-      </div>
-  </div>   
-</div>
-<div class="col-sm-10 col-lg-10 {{slideIn}}" id="newEventContainer">
-  <div id="page-content-wrapper">
-      <div class="container-fluid">
-          <div class="row">
-                <div class="col-md-7" id="divIcons">
-                    <p>Choose the icons that represent your meal</p>
-                    <br>
-                    <div id="categoryContainer">
-                        <div class="row" style="background: #f7c04b;">
-                            <div id="appetizersText" class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
-                                <p style="top: 50%;">APPETIZERS</p>
-                            </div>
-                            <div id="appetizersIcons" class="col-md-10 col-sm-10">
-                                <div class="row" style="background: #f7efdf; padding-left: 35px;">
-                                    <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="appetizer in appetizers track by $index ">
-                                        <input name="{{appetizer._id}}" class="catselect" id="{{appetizer._id}}" ng-checked="exists(appetizer._id, selected)" ng-click="toggle(appetizer._id, selected)" style="display:none;"  type="checkbox">
-                                        <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{appetizer._id}}">
-                                            <img width="80" ng-src="/icons/{{appetizer.icon}}">
-                                            <p>{{appetizer.title}}</p>
-                                        </label>
+                        <div id="categoryContainer">
+                            <div class="row" style="background: #f7c04b;">
+                                <div class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
+                                    <p>DRINKS</p>
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="row" style="background: #f7efdf; padding-left: 35px;">
+                                        <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="drink in drinks track by $index ">
+                                            <input class="catselect" id="{{drink._id}}" ng-checked="exists(drink._id, selectedDrinks)" ng-click="toggle(drink._id, selectedDrinks)" style="display:none;"  type="checkbox">
+                                            <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{drink._id}}">
+                                                <img width="80" ng-src="/icons/{{drink.icon}}">
+                                                <p>{{drink.title}}</p>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div id="categoryContainer">
-                        <div class="row" style="background: #f7c04b;">
-                            <div class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
-                                <p>DISHES</p>
+                    <div class="col-md-4" style="border: solid 2px #f7c04b; margin-top: 80px; border-radius: 8px;">
+                        <div class="row">
+                            <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
+                                <p style="margin-top: 8px; letter-spacing:1px;"><b>MENU</b></p>
                             </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="row" style="background: #f7efdf; padding-left: 35px;">
-                                   <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="dish in dishes track by $index ">
-                                        <input name="{{dish._id}}" class="catselect" id="{{dish._id}}" ng-checked="exists(dish._id, selected)" ng-click="toggle(dish._id, selected)" style="display:none;"  type="checkbox">
-                                        <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{dish._id}}">
-                                            <img width="80" ng-src="/icons/{{dish.icon}}">
-                                            <p>{{dish.title}}</p>
-                                        </label>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p style="text-align:center;" ng-hide="selectedAppetizers.length != 0 || selectedDishes.length != 0 || selectedDesserts.length != 0 || selectedDrinks.length != 0">Nothing selected</p>
+                            <br>
+                            <div class="col-md-12" ng-repeat="appetizer in appetizers track by $index" ng-show="exists(appetizer._id, selectedAppetizers)">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img width="80" style="background:#f7c04b;" ng-src="/icons/{{appetizer.icon}}">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p style="margin-top: 13px;">Descreva o seu prato</p>
+                                        <input id="dishTextBox" name="{{appetizer._id}}" style="height: 33px;" type="text">
                                     </div>
                                 </div>
+                                <br>
+                                <br>
+                                <br>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="categoryContainer">
-                        <div class="row" style="background: #f7c04b;">
-                            <div class="col-md-2 col-sm-2" style=" text-align:center; margin-top: 25px;">
-                                <p>DESSERTS</p>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="row" style="background: #f7efdf; padding-left: 35px;">
-                                    <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="dessert in desserts track by $index ">
-                                        <input name="{{dessert._id}}" class="catselect" id="{{dessert._id}}" ng-checked="exists(dessert._id, selected)" ng-click="toggle(dessert._id, selected)" style="display:none;"  type="checkbox">
-                                        <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{dessert._id}}">
-                                            <img width="80" ng-src="/icons/{{dessert.icon}}">
-                                            <p>{{dessert.title}}</p>
-                                        </label>
+                            <div class="col-md-12" ng-repeat="dish in dishes track by $index" ng-show="exists(dish._id, selectedDishes)">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img width="80" style="background:#f7c04b;" ng-src="/icons/{{dish.icon}}">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p style="margin-top: 13px;">Descreva o seu prato</p>
+                                        <input id="dishTextBox" name="{{dish._id}}" style="height: 33px;" type="text">
                                     </div>
                                 </div>
+                                <br>
+                                <br>
+                                <br>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="categoryContainer">
-                        <div class="row" style="background: #f7c04b;">
-                            <div class="col-md-2 col-sm-2" style="text-align:center; margin-top: 25px;">
-                                <p>DRINKS</p>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="row" style="background: #f7efdf; padding-left: 35px;">
-                                    <div id="category" class="col-md-2 col-sm-2" style="text-align: center; padding: 0;" ng-repeat="drink in drinks track by $index ">
-                                        <input name="{{drink._id}}" class="catselect" id="{{drink._id}}" ng-checked="exists(drink._id, selected)" ng-click="toggle(drink._id, selected)" style="display:none;"  type="checkbox">
-                                        <label class="col-md-12 col-sm-12" style="padding: 0; margin: 0; cursor:pointer; font-weight: normal;" for="{{drink._id}}">
-                                            <img width="80" ng-src="/icons/{{drink.icon}}">
-                                            <p>{{drink.title}}</p>
-                                        </label>
+                            <div class="col-md-12" ng-repeat="dessert in desserts track by $index" ng-show="exists(dessert._id, selectedDesserts)">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img width="80" style="background:#f7c04b;" ng-src="/icons/{{dessert.icon}}">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p style="margin-top: 13px;">Descreva o seu prato</p>
+                                        <input id="dishTextBox" name="{{dessert._id}}" style="height: 33px;" type="text">
                                     </div>
                                 </div>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-md-12" ng-repeat="drink in drinks track by $index" ng-show="exists(drink._id, selectedDrinks)">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img width="80" style="background:#f7c04b;" ng-src="/icons/{{drink.icon}}">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p style="margin-top: 13px;">Descreva o seu prato</p>
+                                        <input id="dishTextBox" name="{{drink._id}}" style="height: 33px;" type="text">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
                             </div>
                         </div>
-                    </div>
+                    </div> 
+                    <div class="col-md-12" style="text-align: center; margin-top:70px;" ng-show="selected.length != 0">
+                        <button id="btNext" class="btn btn-default" ng-click="firstNext()">Next</button>
+                    </div>        
                 </div>
-                <div class="col-md-4" style="border: solid 2px #f7c04b; margin-top: 80px; border-radius: 8px;">
-                    <div class="row">
-                        <div class="col-md-12" style="background:#f7c04b; text-align: center; line-height: 35px;">
-                            <p style="margin-top: 8px; letter-spacing:1px;"><b>MENU</b></p>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <p style="text-align:center;" ng-hide="selected.length != 0">Nothing selected</p>
-                        <br>
-                        <div class="col-md-12" ng-repeat="appetizer in appetizers track by $index" ng-show="exists(appetizer._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{appetizer.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                        <div class="col-md-12" ng-repeat="dish in dishes track by $index" ng-show="exists(dish._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{dish.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                        <div class="col-md-12" ng-repeat="dessert in desserts track by $index" ng-show="exists(dessert._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{dessert.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                        <div class="col-md-12" ng-repeat="drink in drinks track by $index" ng-show="exists(drink._id, selected)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img width="80" style="background:#f7c04b;" ng-src="/icons/{{drink.icon}}">
-                                </div>
-                                <div class="col-md-10">
-                                    <p style="margin-top: 13px;">Descreva o seu prato</p>
-                                    <input id="dishTextBox" style="height: 33px;" type="text">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                </div> 
-                <div class="col-md-12" style="text-align: center; margin-top:70px;" ng-show="selected.length != 0">
-                    <button id="btNext" class="btn btn-default" ng-click="slide()">Next</button>
-                </div>        
-          </div>
-      </div>
-  </div>   
-</div>
+            </div>
+        </div>   
+    </div>
+</form>
