@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('fooding', ['ngRoute','ngTagsInput', 'ui.bootstrap', 'socialLogin' ,'ui.router']);
+  angular.module('fooding', ['ngRoute','ngTagsInput', 'ui.bootstrap', 'socialLogin' ,'ui.router' ,'ngFileUpload']);
 
   function config ($stateProvider, $urlRouterProvider, $locationProvider, socialProvider) {
 

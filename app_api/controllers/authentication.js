@@ -58,6 +58,7 @@ module.exports.loginSocial = function(req, res) {
         return;
       }
       if (user) {
+        console.log(user.profilePic);
         if(user.profilePic == "" || user.profilePic == undefined){
           user.profilePic = req.body.imageUrl;
           user.save(function(err,newuser){
